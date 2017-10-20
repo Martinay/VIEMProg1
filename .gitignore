@@ -34,7 +34,6 @@ ehthumbs.db
 /[Bb]uild
 /[Bb]uilds/
 /[Tt]emp/
-/[Ll]ibrary/
 sysinfo.txt
 *.stackdump
 *.pidb.meta
