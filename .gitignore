@@ -21,6 +21,8 @@ ehthumbs.db
 *.pidb
 *.suo
 *.sln
+*.svd
+*.pdb
 *.user
 *.unityproj
 *.booproj
@@ -29,6 +31,10 @@ ehthumbs.db
 # Unity generated
 # ===============
 [Oo]bj/
-[Bb]uild
+/[Bb]uild
+/[Bb]uilds/
+/[Tt]emp/
+/[Ll]ibrary/
 sysinfo.txt
 *.stackdump
+*.pidb.meta
