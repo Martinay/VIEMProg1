@@ -760,10 +760,11 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 5, y: 0, z: 5}
+  - {x: 5, y: 0, z: 0}
+  - {x: 0, y: 0, z: 5}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 1
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -1142,6 +1143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawingHud: {fileID: 1977143947}
+  DrawingSurface: {fileID: 1307082418}
 --- !u!1001 &597076267
 Prefab:
   m_ObjectHideFlags: 0
@@ -1331,11 +1333,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4294666161912134, guid: c38b71070981c244299096f5ab20f2e3,
     type: 2}
   m_PrefabInternal: {fileID: 753974986}
---- !u!1 &783284564 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1404367628755344, guid: 2276723046d707c4f94d431ceb80ab92,
-    type: 2}
-  m_PrefabInternal: {fileID: 1471478601}
 --- !u!1001 &831153803
 Prefab:
   m_ObjectHideFlags: 0
@@ -2287,7 +2284,7 @@ MonoBehaviour:
   Pinky: 2
   MinimumExtendedCount: 3
   MaximumExtendedCount: 5
-  ShowGizmos: 1
+  ShowGizmos: 0
 --- !u!114 &1053685209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2333,7 +2330,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   _handModel: {fileID: 1471478603}
   ControlsTransform: 1
-  ShowGizmos: 1
+  ShowGizmos: 0
   ActivateDistance: 0.03
   DeactivateDistance: 0.04
 --- !u!1001 &1054672914
@@ -5104,8 +5101,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2128366844}
-  m_LocalRotation: {x: -0.4729519, y: -0.000000020673383, z: 0.88108826, w: 0.00000003851359}
-  m_LocalPosition: {x: -21.318867, y: 0.54833037, z: 17.412308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1053685207}
@@ -5124,7 +5121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameLogic: {fileID: 574147092}
-  DrawingHand: {fileID: 783284564}
+  LineRenderTarget: {fileID: 420776263}
+  DrawingHand: {fileID: 1471478603}
 --- !u!1001 &2130219419
 Prefab:
   m_ObjectHideFlags: 0
