@@ -13,26 +13,55 @@ public class GesturesLogic : MonoBehaviour
 
     private bool _isDrawingMode;
     private bool _isDrawing;
-    private Vector3 _lastPosition;
     private LineRenderer _lineRenderer;
-
+    private int _screenWidth;
+    private int _screenHeight;
+    private float _drawingWidth;
+    private float _drawingHeight;
+    private float _screenScaleFactorWidth;
+    private float _screenScaleFactorHeight;
+    private Stack<Vector3> _points;
     void Start()
     {
+        _points = new Stack<Vector3>();
         _lineRenderer = LineRenderTarget.GetComponent<LineRenderer>();
+        _screenWidth = Screen.width;
+        _screenHeight = Screen.height;
+        _drawingWidth = _lineRenderer.bounds.size.x;
+        _drawingHeight = _lineRenderer.bounds.size.y;
+        _screenScaleFactorWidth = _drawingWidth / _screenWidth;
+        _screenScaleFactorHeight = _drawingHeight / _screenHeight;
     }
 
     void Update()
     {
         if (!_isDrawing)
             return;
+        
         Vector3 positionScreen = GetHandPositionOnScreen();
+        var positionLocal = MapScreenToLocal(positionScreen);
+        if(_points.Count == 0){
+            _points.Push(positionLocal);
+            return;
+        }
 
-        var distanceToOld = Vector3.Distance(_lastPosition, positionScreen);
-        if (distanceToOld < 2)
+        var distanceToOld = Vector3.Distance(_points.Peek(), positionLocal);
+        if (distanceToOld < 0.2)
             return;
 
-        _lastPosition = positionScreen;
-        DrawNewPoint(positionScreen);
+        _points.Push(positionLocal);
+        DrawNewPoint(positionLocal);
+    }
+
+    private Vector3 MapScreenToLocal(Vector3 positionScreen)
+    {
+        var scaledX = positionScreen.x * _screenScaleFactorWidth;
+        var scaledY = positionScreen.y * _screenScaleFactorHeight;
+        var centeredX = scaledX - (_drawingWidth / 2);
+        var centeredY = scaledY - (_drawingHeight /2);
+        var mappedVector = new Vector3(centeredX, 0, centeredY);
+        Debug.Log(mappedVector + " " + positionScreen);
+        return mappedVector;
     }
 
     private Vector3 GetHandPositionOnScreen()
@@ -43,12 +72,15 @@ public class GesturesLogic : MonoBehaviour
         return positionScreen;
     }
 
-    private void DrawNewPoint(Vector3 positionScreen)
+    private void DrawNewPoint(Vector3 position)
     {
-        var positionCount = _lineRenderer.positionCount;
-        _lineRenderer.SetVertexCount(positionCount ++);
-        var random = new System.Random();
-        _lineRenderer.SetPosition(_lineRenderer.positionCount, new Vector3(random.Next(5), random.Next(5), 0));
+        _lineRenderer.positionCount = _points.Count;
+        _lineRenderer.SetPositions(_points.ToArray());
+        //_lineRenderer.positionCount = 2;
+        //_lineRenderer.SetPosition(0, new Vector3(0, 0, 0));
+        //_lineRenderer.SetPosition(1, new Vector3(5, 5, 0));
+        //var random = new System.Random();
+        // _lineRenderer.SetPosition(_lineRenderer.positionCount, new Vector3(random.Next(5), random.Next(5), 0));
     }
 
     public void OnPinchActivate()
@@ -88,6 +120,6 @@ public class GesturesLogic : MonoBehaviour
 
     private void Init()
     {
-        _lastPosition = Vector3.zero;
+        _lineRenderer.positionCount = 0;
     }
 }
