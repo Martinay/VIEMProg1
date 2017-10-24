@@ -32,13 +32,6 @@ public class GesturesLogic : MonoBehaviour
         _gestureInputMode = GestureInputModeGameObject.GetComponent<IInputMode>();
 
         _currentInputMode = _gestureInputMode;
-
-        var visualRepresentationWidth = _visualRepresentationRectTransform.sizeDelta.x;
-        var visualRepresentationHeight = _visualRepresentationRectTransform.sizeDelta.y;
-        var drawingWidth = _lineRenderer.bounds.size.x;
-        var drawingHeight = _lineRenderer.bounds.size.y;
-        _screenScaleFactorWidth = drawingWidth / visualRepresentationWidth;
-        _screenScaleFactorHeight = drawingHeight / visualRepresentationHeight;
     }
 
     void Update()
@@ -88,6 +81,13 @@ public class GesturesLogic : MonoBehaviour
 
     private void StartDrawing()
     {
+        var visualRepresentationWidth = Math.Abs(_visualRepresentationRectTransform.rect.width);
+        var visualRepresentationHeight = Math.Abs(_visualRepresentationRectTransform.rect.height);
+        var drawingWidth = _lineRenderer.bounds.size.x;
+        var drawingHeight = _lineRenderer.bounds.size.y;
+        _screenScaleFactorWidth = drawingWidth / visualRepresentationWidth;
+        _screenScaleFactorHeight = drawingHeight / visualRepresentationHeight;
+
         Reset();
         GameLogic.EnterDrawMode();
     }
@@ -109,6 +109,7 @@ public class GesturesLogic : MonoBehaviour
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(_visualRepresentationRectTransform, positionScreen, null, out localPoint);
         var mappedVector = new Vector3(localPoint.x * _screenScaleFactorWidth, 0.1f, localPoint.y * _screenScaleFactorHeight);
+        //Debug.Log(mappedVector + " " + localPoint + " " + positionScreen);
         return mappedVector;
     }
 
@@ -116,7 +117,7 @@ public class GesturesLogic : MonoBehaviour
     {
         _lineRenderer.positionCount = _points.Count;
         _lineRenderer.SetPosition(_points.Count - 1, position);
-        Debug.Log(position);
+        //Debug.Log(position);
     }
 
     private void Reset()
