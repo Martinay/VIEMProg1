@@ -22,7 +22,7 @@ public class GesturesLogic : MonoBehaviour
     private float _screenScaleFactorWidth;
     private float _screenScaleFactorHeight;
     private Stack<Vector3> _points;
-    private bool _isDrawingMode;
+
     void Start()
     {
         _points = new Stack<Vector3>();
@@ -47,28 +47,24 @@ public class GesturesLogic : MonoBehaviour
         if (Input.GetKeyDown("i"))
         {
             SwitchInput();
-            Reset();
         }
 
         _currentInputMode.UpdateInput();
 
         CheckDrawingMode();
 
-        if(!_currentInputMode.IsDrawingGesture || !_currentInputMode.IsDrawingModeGesture)
+        if (!_currentInputMode.IsDrawingGesture || !_currentInputMode.IsDrawingModeGesture)
             return;
 
         Vector3 positionScreen = _currentInputMode.GetScreenCoordinate();
         var positionLocal = MapScreenToLocal(positionScreen);
 
-        if (_points.Count == 0)
+        if (_points.Count != 0)
         {
-            _points.Push(positionLocal);
-            return;
+            var distanceToOld = Vector3.Distance(_points.Peek(), positionLocal);
+            if (distanceToOld < 0.3)
+                return;
         }
-
-        var distanceToOld = Vector3.Distance(_points.Peek(), positionLocal);
-        if (distanceToOld < 0.3)
-            return;
 
         _points.Push(positionLocal);
         DrawNewPoint(positionLocal);
@@ -76,7 +72,7 @@ public class GesturesLogic : MonoBehaviour
 
     private void CheckDrawingMode()
     {
-        if (_currentInputMode.IsDrawingModeGesture && _isDrawingMode)
+        if (_currentInputMode.IsDrawingModeGesture && _currentInputMode.IsDrawingGesture)
             return;
 
         if (_currentInputMode.IsDrawingModeGesture)
@@ -100,7 +96,7 @@ public class GesturesLogic : MonoBehaviour
         else
             _currentInputMode = _mouseInputMode;
 
-        _currentInputMode.Start();
+        _currentInputMode.StartInput();
     }
 
     private Vector3 MapScreenToLocal(Vector3 positionScreen)
@@ -108,7 +104,6 @@ public class GesturesLogic : MonoBehaviour
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(_visualRepresentationRectTransform, positionScreen, null, out localPoint);
         var mappedVector = new Vector3(localPoint.x * _screenScaleFactorWidth, 0.1f, localPoint.y * _screenScaleFactorHeight);
-        //Debug.Log(mappedVector + " " + localPoint + " " + positionScreen);
         return mappedVector;
     }
 

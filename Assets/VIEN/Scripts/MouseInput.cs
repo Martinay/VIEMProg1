@@ -24,7 +24,7 @@ public class MouseInput : MonoBehaviour, IInputMode
         return new Vector2(mousePosition.x, mousePosition.y);
     }
 
-    public void Start()
+    public void StartInput()
     {
         FPSController.enabled = false;
         Cursor.lockState = CursorLockMode.None;

@@ -48,7 +48,7 @@ public class GestureInput : MonoBehaviour, IInputMode
     {
     }
 
-    public void Start()
+    public void StartInput()
     {
     }
 }

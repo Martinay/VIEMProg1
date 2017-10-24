@@ -8,6 +8,6 @@ public interface IInputMode : IDisposable
     
     void UpdateInput();    
     Vector2 GetScreenCoordinate();
-    void Start();
+    void StartInput();
 }
 
