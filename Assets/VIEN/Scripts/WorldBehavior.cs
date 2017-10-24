@@ -23,7 +23,7 @@ public class WorldBehavior : MonoBehaviour {
 		Timing ();
 	}
 
-	void SetState(int state) {
+	public void SetState(int state) {
 		State = state;
 	}
 
@@ -76,26 +76,19 @@ public class WorldBehavior : MonoBehaviour {
 		}
 	}
 
-	void Reset () {
-		time = 0.0f;
-		innerState = 0;
-		State = -1;
-	}
-
 	void StartState () {
 		time += Time.deltaTime;
 		if(time >= 5.0f && innerState == 0) {
-			Light0.SetActive (true);
+			SetGroupActive (new int[] { 0 }, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 		}
 		else if (time >= 20.0f && innerState == 1) {
-			//AudioSource.PlayClipAtPoint(Introduction, Camera.main.transform.position);
+			AudioSource.PlayClipAtPoint(Introduction, Camera.main.transform.position);
 			innerState++;
 		}
-		else if (time >= /*75.0f*/ 21.0f && innerState == 2) {
-			Light1.SetActive (true);
-			Light2.SetActive (true);
+		else if (time >= 75.0f && innerState == 2) {
+			SetGroupActive (new int[] { 1, 2 }, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -105,27 +98,33 @@ public class WorldBehavior : MonoBehaviour {
 	void StateOne (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light3.SetActive (false);
-			Light4.SetActive (false);
+			int[] falseStates = { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 0 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light1.SetActive (true);
-			Light2.SetActive (true);
+			int[] trueStates = { 1, 2 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
 		}
 	}
-
+		
 	void StateTwo (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light1.SetActive (false);
+			int[] falseStates = { 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 2 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light3.SetActive (true);
+			int[] trueStates = { 0, 3 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -135,14 +134,15 @@ public class WorldBehavior : MonoBehaviour {
 	void StateThree (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light2.SetActive (false);
-			Light5.SetActive (false);
-			Light7.SetActive (false);
+			int[] falseStates = { 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 1 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light0.SetActive (true);
-			Light4.SetActive (true);
+			int[] trueStates = { 0, 4 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -152,15 +152,15 @@ public class WorldBehavior : MonoBehaviour {
 	void StateFour (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light0.SetActive (false);
-			Light6.SetActive (false);
-			Light8.SetActive (false);
+			int[] falseStates = { 0, 2, 3, 6, 8, 9, 10, 11, 12, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 4 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light1.SetActive (true);
-			Light5.SetActive (true);
-			Light7.SetActive (true);
+			int[] trueStates = { 1, 5, 7 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -170,14 +170,15 @@ public class WorldBehavior : MonoBehaviour {
 	void StateFive (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light1.SetActive (false);
-			Light7.SetActive (false);
-			Light9.SetActive (false);
+			int[] falseStates = { 0, 1, 2, 3, 7, 8, 9, 10, 11, 12, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 5 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light4.SetActive (true);
-			Light6.SetActive (true);
+			int[] trueStates = { 4, 6 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -187,15 +188,15 @@ public class WorldBehavior : MonoBehaviour {
 	void StateSix (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light4.SetActive (false);
-			Light8.SetActive (false);
-			Light10.SetActive (false);
-			Light12.SetActive (false);
+			int[] falseStates = { 0, 1, 2, 3, 4, 7, 8, 10, 11, 12, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 6 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light5.SetActive (true);
-			Light9.SetActive (true);
+			int[] trueStates = { 5, 9 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -205,14 +206,15 @@ public class WorldBehavior : MonoBehaviour {
 	void StateSeven (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light1.SetActive (false);
-			Light5.SetActive (false);
-			Light9.SetActive (false);
+			int[] falseStates = { 0, 1, 2, 3, 5, 6, 9, 10, 11, 12, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 7 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light4.SetActive (true);
-			Light8.SetActive (true);
+			int[] trueStates = { 4, 8 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -222,15 +224,15 @@ public class WorldBehavior : MonoBehaviour {
 	void StateEight (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light4.SetActive (false);
-			Light6.SetActive (false);
-			Light10.SetActive (false);
-			Light12.SetActive (false);
+			int[] falseStates = { 0, 1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 8 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light7.SetActive (true);
-			Light9.SetActive (true);
+			int[] trueStates = { 7, 9 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -240,18 +242,15 @@ public class WorldBehavior : MonoBehaviour {
 	void StateNine (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light5.SetActive (false);
-			Light7.SetActive (false);
-			Light11.SetActive (false);
-			Light13.SetActive (false);
-			Light14.SetActive (false);
+			int[] falseStates = { 0, 1, 2, 3, 4, 5, 7, 11, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 9 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light6.SetActive (true);
-			Light8.SetActive (true);
-			Light10.SetActive (true);
-			Light12.SetActive (true);
+			int[] trueStates = { 6, 8, 10, 12 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -261,15 +260,15 @@ public class WorldBehavior : MonoBehaviour {
 	void StateTen (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light6.SetActive (false);
-			Light8.SetActive (false);
-			Light10.SetActive (false);
-			Light14.SetActive (false);
+			int[] falseStates = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 12 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light9.SetActive (true);
-			Light13.SetActive (true);
+			int[] trueStates = { 9, 13 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -279,12 +278,15 @@ public class WorldBehavior : MonoBehaviour {
 	void StateEleven (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light9.SetActive (false);
+			int[] falseStates = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 13 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light12.SetActive (true);
-			Light14.SetActive (true);
+			int[] trueStates = { 12, 14 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -294,14 +296,15 @@ public class WorldBehavior : MonoBehaviour {
 	void StateTwelve (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light6.SetActive (false);
-			Light8.SetActive (false);
-			Light12.SetActive (false);
+			int[] falseStates = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 10 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light9.SetActive (true);
-			Light11.SetActive (true);
+			int[] trueStates = { 9, 11 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
@@ -311,14 +314,76 @@ public class WorldBehavior : MonoBehaviour {
 	void StateThirteen (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light9.SetActive (false);
+			int[] falseStates = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14 };
+			SetGroupActive (falseStates, false);
+			//Set current activ light
+			SetGroupActive (new int[] { 11 }, true);
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light10.SetActive (true);
+			int[] trueStates = { 10 };
+			SetGroupActive (trueStates, true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
 			innerState++;
 			Reset ();
+		}
+	}
+
+	void Reset () {
+		time = 0.0f;
+		innerState = 0;
+		State = -1;
+	}
+
+	void SetGroupActive(int[] lights, bool active){
+		foreach (int light in lights) {
+			switch (light) {
+			case 0:
+				Light0.SetActive (active);
+				break;
+			case 1:
+				Light1.SetActive (active);
+				break;
+			case 2:
+				Light2.SetActive (active);
+				break;
+			case 3:
+				Light3.SetActive (active);
+				break;
+			case 4:
+				Light4.SetActive (active);
+				break;
+			case 5:
+				Light5.SetActive (active);
+				break;
+			case 6:
+				Light6.SetActive (active);
+				break;
+			case 7:
+				Light7.SetActive (active);
+				break;
+			case 8:
+				Light8.SetActive (active);
+				break;
+			case 9:
+				Light9.SetActive (active);
+				break;
+			case 10:
+				Light10.SetActive (active);
+				break;
+			case 11:
+				Light11.SetActive (active);
+				break;
+			case 12:
+				Light12.SetActive (active);
+				break;
+			case 13:
+				Light13.SetActive (active);
+				break;
+			case 14:
+				Light14.SetActive (active);
+				break;
+			}
 		}
 	}
 }
