@@ -3,123 +3,124 @@ using System.Collections;
 using System.Collections.Generic;
 using Leap.Unity;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GesturesLogic : MonoBehaviour
 {
     public GameLogic GameLogic;
     public GameObject LineRenderTarget;
+    public RawImage VisualRepresentation;
+    public Text DebugText;
+    public MouseInput MouseInputModeGameObject;
+    public GestureInput GestureInputModeGameObject;
 
-    public IHandModel DrawingHand;
-
-    private bool _isDrawingMode;
-    private bool _isDrawing;
+    private IInputMode _currentInputMode;
     private LineRenderer _lineRenderer;
-    private int _screenWidth;
-    private int _screenHeight;
-    private float _drawingWidth;
-    private float _drawingHeight;
+    private RectTransform _visualRepresentationRectTransform;
+    private IInputMode _mouseInputMode;
+    private IInputMode _gestureInputMode;
     private float _screenScaleFactorWidth;
     private float _screenScaleFactorHeight;
     private Stack<Vector3> _points;
+    private bool _isDrawingMode;
     void Start()
     {
         _points = new Stack<Vector3>();
         _lineRenderer = LineRenderTarget.GetComponent<LineRenderer>();
-        _screenWidth = Screen.width;
-        _screenHeight = Screen.height;
-        _drawingWidth = _lineRenderer.bounds.size.x;
-        _drawingHeight = _lineRenderer.bounds.size.y;
-        _screenScaleFactorWidth = _drawingWidth / _screenWidth;
-        _screenScaleFactorHeight = _drawingHeight / _screenHeight;
+        _visualRepresentationRectTransform = VisualRepresentation.GetComponent<RectTransform>();
+        _mouseInputMode = MouseInputModeGameObject.GetComponent<IInputMode>();
+        _gestureInputMode = GestureInputModeGameObject.GetComponent<IInputMode>();
+
+        _currentInputMode = _mouseInputMode;
+
+        var visualRepresentationWidth = _visualRepresentationRectTransform.sizeDelta.x;
+        var visualRepresentationHeight = _visualRepresentationRectTransform.sizeDelta.y;
+        var drawingWidth = _lineRenderer.bounds.size.x;
+        var drawingHeight = _lineRenderer.bounds.size.y;
+        _screenScaleFactorWidth = drawingWidth / visualRepresentationWidth;
+        _screenScaleFactorHeight = drawingHeight / visualRepresentationHeight;
     }
 
     void Update()
     {
-        if (!_isDrawing)
+        DebugText.text = _currentInputMode.GetType().Name;
+        if (Input.GetKeyDown("i"))
+        {
+            SwitchInput();
+            Reset();
+        }
+
+        _currentInputMode.UpdateInput();
+
+        CheckDrawingMode();
+
+        if(!_currentInputMode.IsDrawingGesture || !_currentInputMode.IsDrawingModeGesture)
             return;
-        
-        Vector3 positionScreen = GetHandPositionOnScreen();
+
+        Vector3 positionScreen = _currentInputMode.GetScreenCoordinate();
         var positionLocal = MapScreenToLocal(positionScreen);
-        if(_points.Count == 0){
+
+        if (_points.Count == 0)
+        {
             _points.Push(positionLocal);
             return;
         }
 
         var distanceToOld = Vector3.Distance(_points.Peek(), positionLocal);
-        if (distanceToOld < 0.2)
+        if (distanceToOld < 0.3)
             return;
 
         _points.Push(positionLocal);
         DrawNewPoint(positionLocal);
     }
 
-    private Vector3 MapScreenToLocal(Vector3 positionScreen)
+    private void CheckDrawingMode()
     {
-        var scaledX = positionScreen.x * _screenScaleFactorWidth;
-        var scaledY = positionScreen.y * _screenScaleFactorHeight;
-        var centeredX = scaledX - (_drawingWidth / 2);
-        var centeredY = scaledY - (_drawingHeight /2);
-        var mappedVector = new Vector3(centeredX, 0, centeredY);
-        Debug.Log(mappedVector + " " + positionScreen);
-        return mappedVector;
+        if (_currentInputMode.IsDrawingModeGesture && _isDrawingMode)
+            return;
+
+        if (_currentInputMode.IsDrawingModeGesture)
+            StartDrawing();
+        else
+            GameLogic.ExitDrawMode();
     }
 
-    private Vector3 GetHandPositionOnScreen()
+    private void StartDrawing()
     {
-        var hand = DrawingHand.GetLeapHand();
-        var position = ((hand.Fingers[0].TipPosition + hand.Fingers[1].TipPosition) * .5f).ToVector3();
-        var positionScreen = Camera.main.WorldToScreenPoint(hand.Fingers[0].TipPosition.ToVector3());
-        return positionScreen;
+        Reset();
+        GameLogic.EnterDrawMode();
+    }
+
+    private void SwitchInput()
+    {
+        _currentInputMode.Dispose();
+
+        if (_currentInputMode == _mouseInputMode)
+            _currentInputMode = _gestureInputMode;
+        else
+            _currentInputMode = _mouseInputMode;
+
+        _currentInputMode.Start();
+    }
+
+    private Vector3 MapScreenToLocal(Vector3 positionScreen)
+    {
+        Vector2 localPoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(_visualRepresentationRectTransform, positionScreen, null, out localPoint);
+        var mappedVector = new Vector3(localPoint.x * _screenScaleFactorWidth, 0.1f, localPoint.y * _screenScaleFactorHeight);
+        Debug.Log(mappedVector + " " + localPoint + " " + positionScreen);
+        return mappedVector;
     }
 
     private void DrawNewPoint(Vector3 position)
     {
         _lineRenderer.positionCount = _points.Count;
-        _lineRenderer.SetPositions(_points.ToArray());
-        //_lineRenderer.positionCount = 2;
-        //_lineRenderer.SetPosition(0, new Vector3(0, 0, 0));
-        //_lineRenderer.SetPosition(1, new Vector3(5, 5, 0));
-        //var random = new System.Random();
-        // _lineRenderer.SetPosition(_lineRenderer.positionCount, new Vector3(random.Next(5), random.Next(5), 0));
+        _lineRenderer.SetPosition(_points.Count - 1, position);
     }
 
-    public void OnPinchActivate()
+    private void Reset()
     {
-        if (!_isDrawingMode)
-            return;
-
-        _isDrawing = true;
-    }
-
-    public void OnPinchDeactivate()
-    {
-        if (!_isDrawingMode)
-            return;
-
-        _isDrawing = false;
-    }
-
-    public void OnFingerExtendActivate()
-    {
-        Init();
-        if (_isDrawingMode)
-            return;
-
-        _isDrawingMode = true;
-        GameLogic.EnterDrawMode();
-    }
-
-    public void OnFingerExtendDeactivate()
-    {
-        if (!_isDrawingMode)
-            return;
-
-        _isDrawingMode = false;
-        GameLogic.ExitDrawMode();
-    }
-
-    private void Init()
-    {
+        _points.Clear();
         _lineRenderer.positionCount = 0;
     }
 }
