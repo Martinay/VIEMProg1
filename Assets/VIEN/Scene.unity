@@ -1475,7 +1475,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1962856031718400, guid: c960e0b5d8ba6d442b7aed00e9a84337, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4371936171587384, guid: c960e0b5d8ba6d442b7aed00e9a84337, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2970,6 +2970,10 @@ Prefab:
       propertyPath: near clip plane
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_IsPrefabParent: 0
@@ -3028,7 +3032,9 @@ MonoBehaviour:
   Light12: {fileID: 377437750}
   Light13: {fileID: 843150158}
   Light14: {fileID: 653790008}
-  LightsOn: {fileID: 0}
+  LightsOn: {fileID: 8300000, guid: 830f575230dacbd4ab9ce9a6f70fd9cc, type: 3}
+  Introduction: {fileID: 8300000, guid: f20eb926406d5df419e1a34429b2c25d, type: 3}
+  State: 0
 --- !u!1001 &482331877
 Prefab:
   m_ObjectHideFlags: 0
@@ -6104,7 +6110,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1962856031718400, guid: c960e0b5d8ba6d442b7aed00e9a84337, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4371936171587384, guid: c960e0b5d8ba6d442b7aed00e9a84337, type: 2}
       propertyPath: m_LocalPosition.x
@@ -7656,7 +7662,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1962856031718400, guid: c960e0b5d8ba6d442b7aed00e9a84337, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c960e0b5d8ba6d442b7aed00e9a84337, type: 2}
