@@ -8,12 +8,13 @@ public class WorldBehavior : MonoBehaviour {
 	public int State; 
 
 	private float time;
+	private int innerState;
 
 
 
 	// Use this for initialization
 	void Start () {
-		ResetTime ();
+		Reset ();
 	}
 
 	// Update is called once per frame
@@ -35,27 +36,35 @@ public class WorldBehavior : MonoBehaviour {
 		}
 	}
 
-	void ResetTime(){
+	void Reset () {
 		time = 0.0f;
+		innerState = 0;
 	}
 
-	void StartSequence (){
+	void StartSequence () {
 		time += Time.deltaTime;
-		bool first = false, second = false, third = false;
-		if(time >= 5.0f && !first) {
+		if(time >= 5.0f && innerState == 0) {
 			Light0.SetActive (true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
-			first = true;
+			innerState++;
 		}
-		if (time >= 20.0f && !second) {
+		if (time >= 20.0f && innerState == 1) {
 			AudioSource.PlayClipAtPoint(Introduction, Camera.main.transform.position);
-			second = true;
+			innerState++;
 		}
-		if (time >= 80.0f && !third) {
+		if (time >= 80.0f && innerState == 2) {
 			Light1.SetActive (true);
 			Light2.SetActive (true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
-			third = true;
+			innerState++;
+			Reset ();
+		}
+	}
+
+	void SecondState (){
+		time += Time.deltaTime;
+		if (time >= 5.0f && innerState == 0) {
+
 		}
 	}
 }
