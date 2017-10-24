@@ -55,7 +55,12 @@ public class GesturesLogic : MonoBehaviour
 
         if (!_currentInputMode.IsDrawingGesture || !_currentInputMode.IsDrawingModeGesture)
             return;
+            
+        AddAndDrawPoint();
+    }
 
+    private void AddAndDrawPoint()
+    {
         Vector3 positionScreen = _currentInputMode.GetScreenCoordinate();
         var positionLocal = MapScreenToLocal(positionScreen);
 

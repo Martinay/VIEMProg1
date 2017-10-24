@@ -655,7 +655,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 93184755}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Gestures
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,7 +675,6 @@ Transform:
   - {fileID: 1280607628}
   - {fileID: 2128366845}
   - {fileID: 1143276131}
-  - {fileID: 2125952771}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2215,6 +2214,71 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1434496392}
   m_GameObject: {fileID: 338921710}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &365981294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 365981295}
+  - component: {fileID: 365981296}
+  m_Layer: 9
+  m_Name: Directional light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &365981295
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 365981294}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1143276131}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!108 &365981296
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 365981294}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &368873421
 GameObject:
   m_ObjectHideFlags: 0
@@ -2297,7 +2361,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 368873421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 294, y: 211, z: 0}
+  m_LocalPosition: {x: 297, y: 211, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2382,8 +2446,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 384708941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -18.490107}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 334.12985, y: 211, z: -18.490107}
+  m_LocalScale: {x: 0.35230336, y: 0.35230336, z: 0.35230336}
   m_Children:
   - {fileID: 1362600940}
   - {fileID: 926170625}
@@ -2424,12 +2488,12 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1980, y: 1020}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2678,7 +2742,7 @@ GameObject:
   - component: {fileID: 420776267}
   - component: {fileID: 420776266}
   - component: {fileID: 420776265}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Rendertarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3855,7 +3919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 611270901}
   - component: {fileID: 611270902}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MouseInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5343,7 +5407,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 926170624}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 129, y: 196, z: 0}
+  m_LocalPosition: {x: 480, y: 488.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 384708942}
@@ -5351,8 +5415,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 129, y: 196}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 480, y: 488.92}
+  m_SizeDelta: {x: 666.04, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &926170626
 MonoBehaviour:
@@ -5375,12 +5439,12 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 3
+    m_MinSize: 0
+    m_MaxSize: 60
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -6640,7 +6704,7 @@ GameObject:
   - component: {fileID: 1053685207}
   - component: {fileID: 1053685209}
   - component: {fileID: 1053685208}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GestureDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7244,6 +7308,7 @@ Transform:
   m_Children:
   - {fileID: 2115479410}
   - {fileID: 420776264}
+  - {fileID: 365981295}
   m_Father: {fileID: 93184755}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7651,6 +7716,7 @@ Transform:
   m_Children:
   - {fileID: 999096870}
   - {fileID: 1471478602}
+  - {fileID: 2125952771}
   m_Father: {fileID: 93184755}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7875,7 +7941,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1143276131}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: DrawingSurface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8165,16 +8231,16 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1362600939}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 179, y: 0, z: 0}
+  m_LocalPosition: {x: 480, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 384708942}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 179, y: 0}
-  m_SizeDelta: {x: 300, y: 300}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 480, y: 0}
+  m_SizeDelta: {x: -1020, y: -120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1362600941
 MonoBehaviour:
@@ -10810,7 +10876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1870975357}
   - component: {fileID: 1870975358}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GestureInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11112,7 +11178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1980391913
 GameObject:
   m_ObjectHideFlags: 0
@@ -12091,7 +12157,7 @@ GameObject:
   - component: {fileID: 2115479410}
   - component: {fileID: 2115479412}
   - component: {fileID: 2115479411}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: DrawingCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12178,13 +12244,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2125952770}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.0786874, y: -0.92117476, z: 0.26105458, w: -0.27766156}
+  m_LocalPosition: {x: 2.704217, y: 0, z: 27.950264}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 93184755}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_Father: {fileID: 1280607628}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 31.645002, y: -90.00001, z: 0}
 --- !u!108 &2125952772
 Light:
   m_ObjectHideFlags: 0
@@ -12305,7 +12371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2128366845}
   - component: {fileID: 2128366846}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GesturesLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
