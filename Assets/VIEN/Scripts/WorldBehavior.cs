@@ -90,10 +90,10 @@ public class WorldBehavior : MonoBehaviour {
 			innerState++;
 		}
 		else if (time >= 20.0f && innerState == 1) {
-			AudioSource.PlayClipAtPoint(Introduction, Camera.main.transform.position);
+			//AudioSource.PlayClipAtPoint(Introduction, Camera.main.transform.position);
 			innerState++;
 		}
-		else if (time >= 80.0f && innerState == 2) {
+		else if (time >= /*75.0f*/ 21.0f && innerState == 2) {
 			Light1.SetActive (true);
 			Light2.SetActive (true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
@@ -158,7 +158,7 @@ public class WorldBehavior : MonoBehaviour {
 			innerState++;
 		}
 		if (time >= 5.0f && innerState == 1) {
-			Light3.SetActive (true);
+			Light1.SetActive (true);
 			Light5.SetActive (true);
 			Light7.SetActive (true);
 			AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
@@ -170,7 +170,7 @@ public class WorldBehavior : MonoBehaviour {
 	void StateFive (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light3.SetActive (false);
+			Light1.SetActive (false);
 			Light7.SetActive (false);
 			Light9.SetActive (false);
 			innerState++;
@@ -205,7 +205,7 @@ public class WorldBehavior : MonoBehaviour {
 	void StateSeven (){
 		time += Time.deltaTime;
 		if (innerState == 0) {
-			Light3.SetActive (false);
+			Light1.SetActive (false);
 			Light5.SetActive (false);
 			Light9.SetActive (false);
 			innerState++;
