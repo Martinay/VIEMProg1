@@ -5,8 +5,9 @@ public class MouseInput : MonoBehaviour, IInputMode
 {
     public FirstPersonController FPSController;
     private bool _drawMode;
+    private bool _isDrawing;
 
-    public bool IsDrawingGesture { get { return Input.GetMouseButtonDown(0); } }
+    public bool IsDrawingGesture { get { return _isDrawing; } }
 
     public bool IsDrawingModeGesture { get { return _drawMode; } }
 
@@ -35,6 +36,14 @@ public class MouseInput : MonoBehaviour, IInputMode
         if (Input.GetKeyDown("d"))
         {
             _drawMode = !_drawMode;
+        }
+        if(Input.GetMouseButtonDown(0))
+        {
+            _isDrawing = true;
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            _isDrawing = false;
         }
     }
 }

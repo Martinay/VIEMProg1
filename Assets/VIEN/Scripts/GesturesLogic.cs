@@ -31,7 +31,7 @@ public class GesturesLogic : MonoBehaviour
         _mouseInputMode = MouseInputModeGameObject.GetComponent<IInputMode>();
         _gestureInputMode = GestureInputModeGameObject.GetComponent<IInputMode>();
 
-        _currentInputMode = _mouseInputMode;
+        _currentInputMode = _gestureInputMode;
 
         var visualRepresentationWidth = _visualRepresentationRectTransform.sizeDelta.x;
         var visualRepresentationHeight = _visualRepresentationRectTransform.sizeDelta.y;
@@ -108,7 +108,7 @@ public class GesturesLogic : MonoBehaviour
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(_visualRepresentationRectTransform, positionScreen, null, out localPoint);
         var mappedVector = new Vector3(localPoint.x * _screenScaleFactorWidth, 0.1f, localPoint.y * _screenScaleFactorHeight);
-        Debug.Log(mappedVector + " " + localPoint + " " + positionScreen);
+        //Debug.Log(mappedVector + " " + localPoint + " " + positionScreen);
         return mappedVector;
     }
 
@@ -116,6 +116,7 @@ public class GesturesLogic : MonoBehaviour
     {
         _lineRenderer.positionCount = _points.Count;
         _lineRenderer.SetPosition(_points.Count - 1, position);
+        Debug.Log(position);
     }
 
     private void Reset()
