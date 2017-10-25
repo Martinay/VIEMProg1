@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameLogic : MonoBehaviour {
@@ -16,5 +17,11 @@ public class GameLogic : MonoBehaviour {
 	{
 		DrawingHud.SetActive(false);
 		DrawingSurface.SetActive(false);
+	}
+
+	public void SubmitCoordinates(RawCoordinates coordinates)
+	{
+		foreach(var x in coordinates.X)
+			Debug.Log(x);
 	}
 }

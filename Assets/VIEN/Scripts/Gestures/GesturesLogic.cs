@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Leap.Unity;
 using UnityEngine;
 using UnityEngine.UI;
@@ -66,6 +67,21 @@ public class GesturesLogic : MonoBehaviour
     public void HideDrawingVisual()
     {
         GameLogic.ExitDrawMode();
+    }
+
+    public void Submit()
+    {
+        var points = _lineSegments.SelectMany(m => m.Points);
+        var x = new List<float>();
+        var y = new List<float>();
+
+        foreach(var point in points)
+        {
+            x.Add(point.x);
+            y.Add(point.y);
+        }
+
+        GameLogic.SubmitCoordinates(new RawCoordinates(x.ToArray(),y.ToArray()));
     }
 
     public void ShowDrawingVisual()

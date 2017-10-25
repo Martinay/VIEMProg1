@@ -6,15 +6,18 @@ public class MouseInput : MonoBehaviour, IInput
     public FirstPersonController FPSController;
     private bool _drawMode;
     private bool _isDrawing;
+    private bool _submit;
 
     public bool IsDrawingGesture { get { return _isDrawing; } }
 
     public bool IsDrawingModeGesture { get { return _drawMode; } }
 
+    public bool IsSubmitGesture { get { return _submit; } }
+
     public void Dispose()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;        
+        Cursor.visible = false;
         FPSController.enabled = true;
     }
 
@@ -37,11 +40,19 @@ public class MouseInput : MonoBehaviour, IInput
         {
             _drawMode = !_drawMode;
         }
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown("s"))
+        {
+            _submit = true;
+        }
+        if (Input.GetKeyUp("s"))
+        {
+            _submit = false;
+        }
+        if (Input.GetMouseButtonDown(0))
         {
             _isDrawing = true;
         }
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             _isDrawing = false;
         }

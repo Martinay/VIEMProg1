@@ -10,7 +10,9 @@ public class GestureInput : MonoBehaviour, IInput
 
     public bool IsDrawingGesture { get { return _fingerPinched; } }
 
-    public bool IsDrawingModeGesture {get{return _fingerExtended;}}
+    public bool IsDrawingModeGesture { get { return _fingerExtended; } }
+
+    public bool IsSubmitGesture { get { return false; } }
 
     public void Dispose()
     {
