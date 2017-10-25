@@ -12,6 +12,8 @@ class make_req
     //private List<float> _x = new List<float>();
     float[] _x;
     float[] _y;
+    float X;
+    float Y;
     //private List<float> _y = new List<float>();
     //private List<float> _t = new List<float>();
 
@@ -79,6 +81,11 @@ class make_req
             [[";
             foreach (float x in _x)
             {
+                /*   X = x;
+                   if (X < 0)
+                       X = x * -1;
+                   json += X*100;
+                  */
                 json += x;
                 json += ",";
             }
@@ -87,7 +94,12 @@ class make_req
 
             foreach (float y in _y)
             {
-                json += y;
+                /*    Y = y;
+                    if (Y < 0)
+                        Y = y * -1;
+                    json += Y*100;
+                */
+                json += Y;
                 json += ",";
             }
             json = json.Remove(json.LastIndexOf(","), 1);
