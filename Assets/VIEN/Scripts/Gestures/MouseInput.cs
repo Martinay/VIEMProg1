@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class MouseInput : MonoBehaviour, IInputMode
+public class MouseInput : MonoBehaviour, IInput
 {
     public FirstPersonController FPSController;
     private bool _drawMode;
