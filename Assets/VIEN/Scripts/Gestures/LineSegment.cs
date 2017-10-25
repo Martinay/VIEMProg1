@@ -25,6 +25,14 @@ public class LineSegment : IDisposable
         _lineRenderer.useWorldSpace = false;
     }
 
+    public IEnumerable<Vector3> Points
+    {
+        get
+        {
+            return _points;
+        }
+    }
+
     public bool CanDraw(Vector3 newPosition)
     { return _points.Count == 0 || Vector3.Distance(_points.Peek(), newPosition) > 0.3; }
 
