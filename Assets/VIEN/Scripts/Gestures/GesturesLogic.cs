@@ -26,12 +26,6 @@ public class GesturesLogic : MonoBehaviour
     private LineSegment _currentLineSegment;
     private DrawingState _currentState;
 
-    enum DrawingState
-    {
-        Disabled,
-        DrawingVisualEnabled,
-        Drawing
-    }
     void Start()
     {
         _lineSegments = new List<LineSegment>();
@@ -112,18 +106,15 @@ public class GesturesLogic : MonoBehaviour
 
     private void ShowDrawingVisual()
     {
+        Reset();
+        GameLogic.EnterDrawMode();
+
         var visualRepresentationWidth = Math.Abs(_visualRepresentationRectTransform.rect.width);
         var visualRepresentationHeight = Math.Abs(_visualRepresentationRectTransform.rect.height);
         var drawingWidth = _backgroundRenderer.bounds.size.x;
         var drawingHeight = _backgroundRenderer.bounds.size.y;
         _screenScaleFactorWidth = drawingWidth / visualRepresentationWidth;
         _screenScaleFactorHeight = drawingHeight / visualRepresentationHeight;
-        Debug.Log(_visualRepresentationRectTransform.rect);
-        Debug.Log(_visualRepresentationRectTransform.sizeDelta);
-        Debug.Log(drawingWidth + "x" + visualRepresentationWidth);
-        Debug.Log(drawingHeight + "y" + visualRepresentationHeight);
-        Reset();
-        GameLogic.EnterDrawMode();
     }
 
     private void SwitchInput()
@@ -140,18 +131,9 @@ public class GesturesLogic : MonoBehaviour
 
     private Vector3 MapScreenToLocal(Vector3 positionScreen)
     {
-        var plane = new Plane(Camera.main.transform.forward * -1, DrawingBackground.transform.position);
-        Ray mRay = Camera.main.ScreenPointToRay(positionScreen);
-        float rayDistance;
-        if (plane.Raycast(mRay, out rayDistance))
-            Debug.Log(mRay.GetPoint(rayDistance));
-
-
-
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(_visualRepresentationRectTransform, positionScreen, null, out localPoint);
         var mappedVector = new Vector3(localPoint.x * _screenScaleFactorWidth, localPoint.y * _screenScaleFactorHeight, 0.1f);
-        //Debug.Log(mappedVector + " " + localPoint + " " + positionScreen);
         return mappedVector;
     }
 
@@ -170,5 +152,12 @@ public class GesturesLogic : MonoBehaviour
     {
         _currentLineSegment = new LineSegment(DrawingBackground.transform.parent, LineMaterial);
         _lineSegments.Add(_currentLineSegment);
+    }
+
+    enum DrawingState
+    {
+        Disabled,
+        DrawingVisualEnabled,
+        Drawing
     }
 }
