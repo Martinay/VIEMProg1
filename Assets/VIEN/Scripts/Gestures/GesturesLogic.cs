@@ -11,7 +11,6 @@ public class GesturesLogic : MonoBehaviour
     public GameLogic GameLogic;
     public GameObject DrawingBackground;
     public RawImage VisualRepresentation;
-    public Text DebugText;
     public MouseInput MouseInputModeGameObject;
     public GestureInput GestureInputModeGameObject;
     public Material LineMaterial;
@@ -44,7 +43,6 @@ public class GesturesLogic : MonoBehaviour
 
     void Update()
     {
-        DebugText.text = _currentInput.GetType().Name;
         if (Input.GetKeyDown("i"))
             SwitchInput();
 
