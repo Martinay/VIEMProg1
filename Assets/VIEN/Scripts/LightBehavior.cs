@@ -135,10 +135,10 @@ public class LightBehavior : MonoBehaviour {
 			innerState++;
 		}
 		else if (time >= 20.0f && innerState == 1) {
-			gameObject.SendMessage ("PlayIntroduction");
+			//gameObject.SendMessage ("PlayIntroduction");
 			innerState++;
 		}
-		else if (time >= 75.0f && innerState == 2) {
+		else if (time >= /*75.0f*/ 25.0f && innerState == 2) {
 			SetGroupActive (new int[] { 1, 2 }, true);
 			gameObject.SendMessage ("PlayLightsOn");
 			innerState++;
