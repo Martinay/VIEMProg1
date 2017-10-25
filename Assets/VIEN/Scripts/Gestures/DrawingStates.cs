@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class DrawingStates
 {
@@ -81,7 +82,16 @@ public class DrawingStates
                 break;
             case (DrawingStateEnum.Drawing):
                 ExecuteOneTimeAction(() => _gesturesLogic.AddNewLineSegment());
-                _gesturesLogic.AddCurrentInputPointToLine();
+                var localVector = _gesturesLogic.GetLocalPoint();
+                if(!_gesturesLogic.CheckIfInsideFrame(localVector))
+                {
+                    if(!_gesturesLogic.IsCurrentLineSegmentEmpty)
+                        _gesturesLogic.AddNewLineSegment();
+                    break;
+                }
+                if(!_gesturesLogic.CheckMinDistanceToLastPoint(localVector))
+                    break;
+                _gesturesLogic.AddCurrentInputPointToLine(localVector);
                 break;
             case (DrawingStateEnum.Submit):
                 ExecuteOneTimeAction(() => _gesturesLogic.Submit());

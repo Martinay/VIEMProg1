@@ -33,7 +33,7 @@ public class LineSegment : IDisposable
         }
     }
 
-    public bool CanDraw(Vector3 newPosition)
+    public bool CheckDistanceToLastPoint(Vector3 newPosition)
     { return _points.Count == 0 || Vector3.Distance(_points.Peek(), newPosition) > 0.3; }
 
     public void AddAndDrawPoint(Vector3 vector)

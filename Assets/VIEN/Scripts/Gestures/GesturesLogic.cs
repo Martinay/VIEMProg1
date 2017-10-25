@@ -27,6 +27,8 @@ public class GesturesLogic : MonoBehaviour
     private IList<LineSegment> _lineSegments;
     private LineSegment _currentLineSegment;
 
+    public bool IsCurrentLineSegmentEmpty { get {return _currentLineSegment.Points.Count() == 0;} }
+
     void Start()
     {
         _lineSegments = new List<LineSegment>();
@@ -53,15 +55,30 @@ public class GesturesLogic : MonoBehaviour
         _states.DoAction();
     }
 
-    public void AddCurrentInputPointToLine()
+    public Vector3 GetLocalPoint()
     {
         Vector3 positionScreen = _currentInput.GetScreenCoordinate();
         var positionLocal = MapScreenToLocal(positionScreen);
+        return positionLocal;
+    }
 
-        if (!_currentLineSegment.CanDraw(positionLocal))
-            return;
+    public bool CheckMinDistanceToLastPoint(Vector3 vectorLocal)
+    {
+        return _currentLineSegment.CheckDistanceToLastPoint(vectorLocal);
+    }
 
-        _currentLineSegment.AddAndDrawPoint(positionLocal);
+    public bool CheckIfInsideFrame(Vector3 vectorLocal)
+    {
+        var rect = _backgroundRenderer.bounds.size;
+        var maxY = rect.x / 2;
+        var maxX = rect.y / 2;
+
+        return Math.Abs(vectorLocal.x) <= maxX && Math.Abs(vectorLocal.y) <= maxY;
+    }
+
+    public void AddCurrentInputPointToLine(Vector3 vectorLocal)
+    {
+        _currentLineSegment.AddAndDrawPoint(vectorLocal);
     }
 
     public void HideDrawingVisual()
