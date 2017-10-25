@@ -21,7 +21,10 @@ public class GameLogic : MonoBehaviour {
 
 	public void SubmitCoordinates(RawCoordinates coordinates)
 	{
-		foreach(var x in coordinates.X)
-			Debug.Log(x);
+        make_req req = new make_req(coordinates);
+        req.Req();
+
+		//foreach(var x in coordinates.X)
+			//Debug.Log(x);
 	}
 }
