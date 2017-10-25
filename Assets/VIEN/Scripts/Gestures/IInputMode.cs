@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public interface IInputMode : IDisposable
+public interface IInput : IDisposable
 {
     bool IsDrawingGesture { get; }
     bool IsDrawingModeGesture { get; }

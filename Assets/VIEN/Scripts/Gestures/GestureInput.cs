@@ -2,7 +2,7 @@ using System;
 using Leap.Unity;
 using UnityEngine;
 
-public class GestureInput : MonoBehaviour, IInputMode
+public class GestureInput : MonoBehaviour, IInput
 {
     public IHandModel DrawingHand;
     private bool _fingerExtended;
