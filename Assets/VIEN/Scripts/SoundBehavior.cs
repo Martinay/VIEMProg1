@@ -24,7 +24,21 @@ public class SoundBehavior : MonoBehaviour {
 	}
 
 	public void PlayWrong () {
-		AudioSource.PlayClipAtPoint(Wrong1, Camera.main.transform.position);
+		int src = 0;
+		switch(src){
+		case 0:
+			AudioSource.PlayClipAtPoint(Wrong1, Camera.main.transform.position);
+			break;
+		case 1:
+			AudioSource.PlayClipAtPoint(Wrong2, Camera.main.transform.position);
+			break;
+		case 2:
+			AudioSource.PlayClipAtPoint(Wrong3, Camera.main.transform.position);
+			break;
+		case 3:
+			AudioSource.PlayClipAtPoint(Wrong4, Camera.main.transform.position);
+			break;
+		}
 	}
 
 	public void PlayHeart () {
