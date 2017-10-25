@@ -5,14 +5,15 @@ using UnityEngine;
 public class GestureInput : MonoBehaviour, IInput
 {
     public IHandModel DrawingHand;
-    private bool _fingerExtended;
-    private bool _fingerPinched;
+    private bool _menuFingerExtended;
+    private bool _menuFingerPinched;
+    private bool _drawFingerPinched;
 
-    public bool IsDrawingGesture { get { return _fingerPinched; } }
+    public bool IsDrawingGesture { get { return _drawFingerPinched; } }
 
-    public bool IsDrawingModeGesture { get { return _fingerExtended; } }
+    public bool IsDrawingModeGesture { get { return _menuFingerExtended; } }
 
-    public bool IsSubmitGesture { get { return false; } }
+    public bool IsSubmitGesture { get { return _menuFingerPinched; } }
 
     public void Dispose()
     {
@@ -26,24 +27,34 @@ public class GestureInput : MonoBehaviour, IInput
         return positionScreen;
     }
 
-    public void OnPinchActivate()
+    public void OnDrawPinchActivate()
     {
-        _fingerPinched = true;
+        _drawFingerPinched = true;
     }
 
-    public void OnPinchDeactivate()
+    public void OnDrawPinchDeactivate()
     {
-        _fingerPinched = false;
+        _drawFingerPinched = false;
     }
 
-    public void OnFingerExtendActivate()
+    public void OnMenuPinchActivate()
     {
-        _fingerExtended = true;
+        _menuFingerPinched = true;
     }
 
-    public void OnFingerExtendDeactivate()
+    public void OnMenuPinchDeactivate()
     {
-        _fingerExtended = false;
+        _menuFingerPinched = false;
+    }
+
+    public void OnMenuFingerExtendActivate()
+    {
+        _menuFingerExtended = true;
+    }
+
+    public void OnMenuFingerExtendDeactivate()
+    {
+        _menuFingerExtended = false;
     }
 
     public void UpdateInput()
