@@ -26,7 +26,7 @@ public class GesturesLogic : MonoBehaviour
     private IList<LineSegment> _lineSegments;
     private LineSegment _currentLineSegment;
 
-    public bool IsCurrentLineSegmentEmpty { get {return _currentLineSegment.Points.Count() == 0;} }
+    public bool IsCurrentLineSegmentEmpty { get { return _currentLineSegment.Points.Count() == 0; } }
 
     void Start()
     {
@@ -90,13 +90,13 @@ public class GesturesLogic : MonoBehaviour
         var x = new List<float>();
         var y = new List<float>();
 
-        foreach(var point in points)
+        foreach (var point in points)
         {
             x.Add(point.x);
             y.Add(point.y);
         }
 
-        GameLogic.SubmitCoordinates(new RawCoordinates(x.ToArray(),y.ToArray()));
+        GameLogic.SubmitCoordinates(new RawCoordinates(x.ToArray(), y.ToArray(), (int)_backgroundRenderer.bounds.size.x, (int)_backgroundRenderer.bounds.size.y));
     }
 
     public void ShowDrawingVisual()
