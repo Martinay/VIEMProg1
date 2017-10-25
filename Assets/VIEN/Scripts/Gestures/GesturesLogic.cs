@@ -8,86 +8,120 @@ using UnityEngine.UI;
 public class GesturesLogic : MonoBehaviour
 {
     public GameLogic GameLogic;
-    public GameObject LineRenderTarget;
+    public GameObject DrawingBackground;
     public RawImage VisualRepresentation;
     public Text DebugText;
     public MouseInput MouseInputModeGameObject;
     public GestureInput GestureInputModeGameObject;
+    public Material LineMaterial;
 
     private IInputMode _currentInputMode;
-    private LineRenderer _lineRenderer;
     private RectTransform _visualRepresentationRectTransform;
     private IInputMode _mouseInputMode;
     private IInputMode _gestureInputMode;
+    private Renderer _backgroundRenderer;
     private float _screenScaleFactorWidth;
     private float _screenScaleFactorHeight;
-    private Stack<Vector3> _points;
+    private IList<LineSegment> _lineSegments;
+    private LineSegment _currentLineSegment;
+    private DrawingState _currentState;
 
+    enum DrawingState
+    {
+        Disabled,
+        DrawingVisualEnabled,
+        Drawing
+    }
     void Start()
     {
-        _points = new Stack<Vector3>();
-        _lineRenderer = LineRenderTarget.GetComponent<LineRenderer>();
+        _lineSegments = new List<LineSegment>();
         _visualRepresentationRectTransform = VisualRepresentation.GetComponent<RectTransform>();
         _mouseInputMode = MouseInputModeGameObject.GetComponent<IInputMode>();
         _gestureInputMode = GestureInputModeGameObject.GetComponent<IInputMode>();
+        _backgroundRenderer = DrawingBackground.GetComponent<Renderer>();
 
         _currentInputMode = _gestureInputMode;
+        _currentState = DrawingState.Disabled;
     }
 
     void Update()
     {
         DebugText.text = _currentInputMode.GetType().Name;
         if (Input.GetKeyDown("i"))
-        {
             SwitchInput();
-        }
 
         _currentInputMode.UpdateInput();
 
-        CheckDrawingMode();
+        UpdateState();
 
-        if (!_currentInputMode.IsDrawingGesture || !_currentInputMode.IsDrawingModeGesture)
+        if (_currentState != DrawingState.Drawing)
             return;
-            
-        AddAndDrawPoint();
-    }
 
-    private void AddAndDrawPoint()
-    {
         Vector3 positionScreen = _currentInputMode.GetScreenCoordinate();
         var positionLocal = MapScreenToLocal(positionScreen);
 
-        if (_points.Count != 0)
-        {
-            var distanceToOld = Vector3.Distance(_points.Peek(), positionLocal);
-            if (distanceToOld < 0.3)
-                return;
-        }
-
-        _points.Push(positionLocal);
-        DrawNewPoint(positionLocal);
-    }
-
-    private void CheckDrawingMode()
-    {
-        if (_currentInputMode.IsDrawingModeGesture && _currentInputMode.IsDrawingGesture)
+        if (!_currentLineSegment.CanDraw(positionLocal))
             return;
 
-        if (_currentInputMode.IsDrawingModeGesture)
-            StartDrawing();
-        else
-            GameLogic.ExitDrawMode();
+        _currentLineSegment.AddAndDrawPoint(positionLocal);
     }
 
-    private void StartDrawing()
+    private void UpdateState()
+    {
+        switch (_currentState)
+        {
+            case (DrawingState.Disabled):
+                if (_currentInputMode.IsDrawingModeGesture)
+                {
+                    ShowDrawingVisual();
+                    _currentState = DrawingState.DrawingVisualEnabled;
+                }
+                break;
+            case (DrawingState.DrawingVisualEnabled):
+                if (!_currentInputMode.IsDrawingModeGesture)
+                {
+                    HideDrawingVisual();
+                    _currentState = DrawingState.Disabled;
+                }
+                else if (_currentInputMode.IsDrawingGesture)
+                {
+                    AddNewLineSegment();
+                    _currentState = DrawingState.Drawing;
+                }
+                break;
+            case (DrawingState.Drawing):
+                if (!_currentInputMode.IsDrawingModeGesture)
+                {
+                    HideDrawingVisual();
+                    _currentState = DrawingState.Disabled;
+                }
+                else if (!_currentInputMode.IsDrawingGesture)
+                {
+                    _currentState = DrawingState.DrawingVisualEnabled;
+                }
+                break;
+            default:
+                throw new Exception("out of range" + _currentState);
+        }
+    }
+
+    private void HideDrawingVisual()
+    {
+        GameLogic.ExitDrawMode();
+    }
+
+    private void ShowDrawingVisual()
     {
         var visualRepresentationWidth = Math.Abs(_visualRepresentationRectTransform.rect.width);
         var visualRepresentationHeight = Math.Abs(_visualRepresentationRectTransform.rect.height);
-        var drawingWidth = _lineRenderer.bounds.size.x;
-        var drawingHeight = _lineRenderer.bounds.size.y;
+        var drawingWidth = _backgroundRenderer.bounds.size.x;
+        var drawingHeight = _backgroundRenderer.bounds.size.y;
         _screenScaleFactorWidth = drawingWidth / visualRepresentationWidth;
         _screenScaleFactorHeight = drawingHeight / visualRepresentationHeight;
-
+        Debug.Log(_visualRepresentationRectTransform.rect);
+        Debug.Log(_visualRepresentationRectTransform.sizeDelta);
+        Debug.Log(drawingWidth + "x" + visualRepresentationWidth);
+        Debug.Log(drawingHeight + "y" + visualRepresentationHeight);
         Reset();
         GameLogic.EnterDrawMode();
     }
@@ -106,23 +140,35 @@ public class GesturesLogic : MonoBehaviour
 
     private Vector3 MapScreenToLocal(Vector3 positionScreen)
     {
+        var plane = new Plane(Camera.main.transform.forward * -1, DrawingBackground.transform.position);
+        Ray mRay = Camera.main.ScreenPointToRay(positionScreen);
+        float rayDistance;
+        if (plane.Raycast(mRay, out rayDistance))
+            Debug.Log(mRay.GetPoint(rayDistance));
+
+
+
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(_visualRepresentationRectTransform, positionScreen, null, out localPoint);
-        var mappedVector = new Vector3(localPoint.x * _screenScaleFactorWidth, 0.1f, localPoint.y * _screenScaleFactorHeight);
+        var mappedVector = new Vector3(localPoint.x * _screenScaleFactorWidth, localPoint.y * _screenScaleFactorHeight, 0.1f);
         //Debug.Log(mappedVector + " " + localPoint + " " + positionScreen);
         return mappedVector;
     }
 
-    private void DrawNewPoint(Vector3 position)
-    {
-        _lineRenderer.positionCount = _points.Count;
-        _lineRenderer.SetPosition(_points.Count - 1, position);
-        //Debug.Log(position);
-    }
-
     private void Reset()
     {
-        _points.Clear();
-        _lineRenderer.positionCount = 0;
+        foreach (var lineSegment in _lineSegments)
+        {
+            lineSegment.Dispose();
+        }
+
+        _lineSegments.Clear();
+        AddNewLineSegment();
+    }
+
+    private void AddNewLineSegment()
+    {
+        _currentLineSegment = new LineSegment(DrawingBackground.transform.parent, LineMaterial);
+        _lineSegments.Add(_currentLineSegment);
     }
 }
