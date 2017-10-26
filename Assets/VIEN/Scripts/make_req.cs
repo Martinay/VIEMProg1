@@ -14,6 +14,8 @@ class make_req
     float[] _y;
     float X;
     float Y;
+    int width;
+    int height;
     //private List<float> _y = new List<float>();
     //private List<float> _t = new List<float>();
 
@@ -24,6 +26,8 @@ class make_req
     {
         _x = coordinates.X;
         _y = coordinates.Y;
+        width = coordinates.Width;
+        height = coordinates.Height;
     }
 
     public bool MyRemoteCertificateValidationCallback(System.Object sender,
@@ -72,20 +76,16 @@ class make_req
 	""requests"": [{
 		""language"": ""quickdraw"",
 		""writing_guide"": {
-			""width"": 1536,
-			""height"": 358
-
+			""width"": "; json += width;
+                json += @",
+			""height"":"; json += height;
+                json += @"
         },
 		""ink"": [
 
             [[";
             foreach (float x in _x)
             {
-                /*   X = x;
-                   if (X < 0)
-                       X = x * -1;
-                   json += X*100;
-                  */
                 json += x;
                 json += ",";
             }
@@ -94,11 +94,6 @@ class make_req
 
             foreach (float y in _y)
             {
-                /*    Y = y;
-                    if (Y < 0)
-                        Y = y * -1;
-                    json += Y*100;
-                */
                 json += Y;
                 json += ",";
             }
