@@ -86,7 +86,7 @@ public class GesturesLogic : MonoBehaviour
 
     public void Submit()
     {
-        var points = _lineSegments.SelectMany(m => m.Points);
+        var points = _lineSegments.SelectMany(m => m.Points).Reverse();
         var x = new List<float>();
         var y = new List<float>();
 

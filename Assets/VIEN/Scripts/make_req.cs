@@ -8,17 +8,11 @@ using UnityEngine;
 
 class make_req
 {
-
-    //private List<float> _x = new List<float>();
-    float[] _x;
-    float[] _y;
-    float X;
-    float Y;
+    
+    int[] _x;
+    int[] _y;
     int width;
     int height;
-    //private List<float> _y = new List<float>();
-    //private List<float> _t = new List<float>();
-
 
     private string _response;
 
@@ -94,7 +88,7 @@ class make_req
 
             foreach (float y in _y)
             {
-                json += Y;
+                json += y;
                 json += ",";
             }
             json = json.Remove(json.LastIndexOf(","), 1);
@@ -143,8 +137,10 @@ class make_req
             }
             if (found)
             {
-                Debug.Log(element + " found");
-            }
+                //Debug.Log(element + " found");
+                Debug.Log(resp);
+            
+        }
             else
             {
                 Debug.Log(resp);
