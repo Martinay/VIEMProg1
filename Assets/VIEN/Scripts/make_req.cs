@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 class make_req
 {
-    
+
     int[] _x;
     int[] _y;
     int width;
@@ -17,7 +18,7 @@ class make_req
 
     private string _response;
 
-    public make_req(RawCoordinates coordinates , GameObject[] a)
+    public make_req(RawCoordinates coordinates, GameObject[] a)
     {
         _x = coordinates.X;
         _y = coordinates.Y;
@@ -73,9 +74,9 @@ class make_req
 		""language"": ""quickdraw"",
 		""writing_guide"": {
 			""width"": "; json += width;
-                json += @",
+            json += @",
 			""height"":"; json += height;
-                json += @"
+            json += @"
         },
 		""ink"": [
 
@@ -121,51 +122,52 @@ class make_req
         var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
         using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
         {
-           // List<string> searchobjects = new List<string> { "line", "house", "car", "triangle" };
             string resp = streamReader.ReadToEnd();
 
-
-
-            /*
-
-            JArray a = JArray.Parse(resp);
-            foreach (JObject o in a.Children<JObject>())
-            {
-                foreach (JProperty p in o.Properties())
-                {
-                    string name = p.Name;
-                    string value = (string)p.Value;
-                    Console.WriteLine(name + " -- " + value);
-                }
-            }
-            */
-
-
-            /*
-            bool found = false;
-            string element="";
+            //check if searchtag in response and add the highest possabillity
+            Dictionary<int, GameObject> dict = new Dictionary<int, GameObject>();
+            string element = "";
+            int index;
+            int currentBest = int.MaxValue;
+            DrawableBehavior currentBestDrawable = null;
             foreach (GameObject s in drawables)
             {
-                if (resp.IndexOf(s) != -1)
-                {
-                    found = true;
-                    element = s.;
-                    break;
-                }
+                var tmpDrawable = s.GetComponent<DrawableBehavior>();
+                index = resp.IndexOf(tmpDrawable.SearchTag);
 
+                //if element found, add it
+                if (index == -1)
+                    continue;
+                if (index > currentBest)
+                    continue;
+
+                currentBest = index;
+                currentBestDrawable = tmpDrawable;
             }
-           
-            if (found)
-            {
-                //Debug.Log(element + " found");
-                Debug.Log(resp);
             
-        }
-            else
+            if(currentBestDrawable != null)
             {
-                Debug.Log(resp);
+                Debug.Log(currentBestDrawable.SearchTag + " found");
+                currentBestDrawable.SendMessage("Teleport");
             }
- */
+            Debug.Log(resp);
+            /*
+            if (dict.Count > 0)
+            {
+                var myList = dict.ToList();
+                myList.Sort((pair1, pair2) => pair1.Key.CompareTo(pair2.Key));
+
+
+                var objfound = myList.FirstOrDefault().Value.GetComponent<DrawableBehavior>();
+
+                Debug.Log(objfound.SearchTag + " found");
+                objfound.SendMessage("Teleport");
+            }
+
+
+            Debug.Log(resp);
+
+           */
         }
     }
 }
