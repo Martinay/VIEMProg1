@@ -13,15 +13,17 @@ class make_req
     int[] _y;
     int width;
     int height;
+    GameObject[] drawables;
 
     private string _response;
 
-    public make_req(RawCoordinates coordinates)
+    public make_req(RawCoordinates coordinates , GameObject[] a)
     {
         _x = coordinates.X;
         _y = coordinates.Y;
         width = coordinates.Width;
         height = coordinates.Height;
+        drawables = a;
     }
 
     public bool MyRemoteCertificateValidationCallback(System.Object sender,
@@ -119,22 +121,40 @@ class make_req
         var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
         using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
         {
-            List<string> searchobjects = new List<string> { "line", "house", "car", "triangle" };
+           // List<string> searchobjects = new List<string> { "line", "house", "car", "triangle" };
             string resp = streamReader.ReadToEnd();
 
+
+
+            /*
+
+            JArray a = JArray.Parse(resp);
+            foreach (JObject o in a.Children<JObject>())
+            {
+                foreach (JProperty p in o.Properties())
+                {
+                    string name = p.Name;
+                    string value = (string)p.Value;
+                    Console.WriteLine(name + " -- " + value);
+                }
+            }
+            */
+
+
+            /*
             bool found = false;
             string element="";
-            foreach (string a in searchobjects)
+            foreach (GameObject s in drawables)
             {
-
-                if (resp.IndexOf(a) != -1)
+                if (resp.IndexOf(s) != -1)
                 {
                     found = true;
-                    element = a;
+                    element = s.;
                     break;
                 }
 
             }
+           
             if (found)
             {
                 //Debug.Log(element + " found");
@@ -145,7 +165,7 @@ class make_req
             {
                 Debug.Log(resp);
             }
-
+ */
         }
     }
 }
