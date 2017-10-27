@@ -17,8 +17,9 @@ public class DrawableBehavior : MonoBehaviour {
 		
 	}
 
-	void Teleport() {
+	public void Teleport() {
 		player.transform.position = this.transform.position;
+		player.transform.rotation = this.transform.rotation;
 		WorldInteraction.SendMessage ("SetState",State);
 	}
 }

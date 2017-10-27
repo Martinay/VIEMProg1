@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d0bab24775481a74cb692671fee2d09d
+guid: cdde8be27303d8b4d9121e24be5a73bd
 timeCreated: 1491827578
 licenseType: Store
 ModelImporter:
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: chair.001
+    4300000: chair.002
   materials:
     importMaterials: 1
     materialName: 0
