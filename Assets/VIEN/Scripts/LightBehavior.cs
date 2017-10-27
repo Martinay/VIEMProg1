@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LightBehavior : MonoBehaviour {
-	public GameObject Light0, Light1, Light2, Light3, Light4, Light5, Light6, Light7, Light8, Light9, Light10, 
-	Light11, Light12, Light13, Light14, Light15, Light16, Light17;
+	public GameObject Light0_0, Light0_1, Light1, Light2, Light3, Light4, Light5, Light6_0, Light6_1, Light7, Light8_0,
+	Light8_1, Light9_0, Light9_1, Light9_2, Light10, Light11, Light12, Light13, Light14;
 	public int State; 
 
 	private float time;
@@ -35,91 +35,91 @@ public class LightBehavior : MonoBehaviour {
 		case 1:
 			ApplyState ( 
 				new int[] { 0 },
-				new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 },
+				new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 },
 				new int[] { 1, 2 }
 			);
 			break;
 		case 2:
 			ApplyState ( 
 				new int[] { 2 },
-				new int[] { 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 },
+				new int[] { 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 },
 				new int[] { 0, 3 }
 			);
 			break;
 		case 3:
 			ApplyState ( 
 				new int[] { 1 },
-				new int[] { 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 },
+				new int[] { 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 },
 				new int[] { 0, 4 }
 			);
 			break;
 		case 4:
 			ApplyState (
 				new int[] { 4 },
-				new int[] { 0, 2, 3, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 },
+				new int[] { 0, 2, 3, 6, 8, 9, 10, 11, 12, 13, 14 },
 				new int[] { 1, 5, 7 }
 			);
 			break;
 		case 5:
 			ApplyState ( 
 				new int[] { 5 },
-				new int[] { 0, 1, 2, 3, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 },
+				new int[] { 0, 1, 2, 3, 7, 8, 9, 10, 11, 12, 13, 14 },
 				new int[] { 4, 6 }
 			);
 			break;
 		case 6:
 			ApplyState ( 
 				new int[] { 6 },
-				new int[] { 0, 1, 2, 3, 4, 7, 8, 10, 11, 12, 13, 14, 17 },
-				new int[] { 5, 9, 15, 16 }
+				new int[] { 0, 1, 2, 3, 4, 7, 8, 10, 11, 12, 13, 14 },
+				new int[] { 5, 9 }
 			);
 			break;
 		case 7:
 			ApplyState ( 
 				new int[] { 7 },
-				new int[] { 0, 1, 2, 3, 5, 6, 9, 10, 11, 12, 13, 14, 15, 16 },
-				new int[] { 4, 8, 17 }
+				new int[] { 0, 1, 2, 3, 5, 6, 9, 10, 11, 12, 13, 14 },
+				new int[] { 4, 8 }
 			);
 			break;
 		case 8:
 			ApplyState ( 
-				new int[] { 8, 17 },
+				new int[] { 8 },
 				new int[] { 0, 1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14 },
-				new int[] { 7, 9, 15, 16 }
+				new int[] { 7, 9 }
 			);
 			break;
 		case 9:
 			ApplyState ( 
-				new int[] { 9, 15, 16 },
+				new int[] { 9 },
 				new int[] { 0, 1, 2, 3, 4, 5, 7, 11, 13, 14 },
-				new int[] { 6, 8, 10, 12, 17 }
+				new int[] { 6, 8, 10, 12 }
 			);
 			break;
 		case 10:
 			ApplyState ( 
 				new int[] { 12 },
-				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 14, 17 },
-				new int[] { 9, 13, 15, 16 }
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 14 },
+				new int[] { 9, 13 }
 			);
 			break;
 		case 11:
 			ApplyState ( 
 				new int[] { 13 },
-				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17 },
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
 				new int[] { 12, 14 }
 			);
 			break;
 		case 12:
 			ApplyState ( 
 				new int[] { 10 },
-				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 17 },
-				new int[] { 9, 11, 15, 16 }
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14 },
+				new int[] { 9, 11 }
 			);
 			break;
 		case 13:
 			ApplyState ( 
 				new int[] { 11 },
-				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16, 17 },
+				new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14 },
 				new int[] { 10 }
 			);
 			break;
@@ -178,7 +178,8 @@ public class LightBehavior : MonoBehaviour {
 				Debug.Log("Light " + light);
 			switch (light) {
 			case 0:
-				Light0.SetActive (active);
+				Light0_0.SetActive (active);
+				Light0_1.SetActive (active);
 				break;
 			case 1:
 				Light1.SetActive (active);
@@ -196,16 +197,20 @@ public class LightBehavior : MonoBehaviour {
 				Light5.SetActive (active);
 				break;
 			case 6:
-				Light6.SetActive (active);
+				Light6_0.SetActive (active);
+				Light6_1.SetActive (active);
 				break;
 			case 7:
 				Light7.SetActive (active);
 				break;
 			case 8:
-				Light8.SetActive (active);
+				Light8_0.SetActive (active);
+				Light8_1.SetActive (active);
 				break;
 			case 9:
-				Light9.SetActive (active);
+				Light9_0.SetActive (active);
+				Light9_1.SetActive (active);
+				Light9_2.SetActive (active);
 				break;
 			case 10:
 				Light10.SetActive (active);
@@ -221,15 +226,6 @@ public class LightBehavior : MonoBehaviour {
 				break;
 			case 14:
 				Light14.SetActive (active);
-				break;
-			case 15:
-				Light15.SetActive (active);
-				break;
-			case 16:
-				Light16.SetActive (active);
-				break;
-			case 17:
-				Light17.SetActive (active);
 				break;
 			}
 		}
