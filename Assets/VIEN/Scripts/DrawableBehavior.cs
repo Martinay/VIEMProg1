@@ -5,7 +5,7 @@ using UnityEngine;
 public class DrawableBehavior : MonoBehaviour {
 	public GameObject WorldInteraction;
 	public int State;
-	public string[] SearchTag = new string[3];
+	public string[] SearchTag = new string[1];
 	private GameObject player;
 	// Use this for initialization
 	void Start () {
