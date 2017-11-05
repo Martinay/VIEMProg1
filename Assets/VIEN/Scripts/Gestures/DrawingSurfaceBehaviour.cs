@@ -23,6 +23,7 @@ public class DrawingSurfaceBehaviour : MonoBehaviour
     private float _screenScaleFactorHeight;
     private IList<LineSegment> _lineSegments;
     private LineSegment _currentLineSegment;
+    private IOnSubmit _onSubmitHandler;
 
     public bool IsCurrentLineSegmentEmpty { get { return _currentLineSegment.Points.Count() == 0; } }
 
@@ -40,6 +41,11 @@ public class DrawingSurfaceBehaviour : MonoBehaviour
         _states.UpdateState(InputBehaviour.CurrentInput);
 
         _states.DoAction();
+    }
+
+    public void SetOnSubmitHandler(IOnSubmit onSubmit)
+    {
+        _onSubmitHandler = onSubmit;
     }
 
     public Vector3 GetLocalPoint()
@@ -76,9 +82,7 @@ public class DrawingSurfaceBehaviour : MonoBehaviour
     
     public void OnDrawingFinished()
     {
-        var lines = _lineSegments.Where(x=> !x.IsEmpty).Select(x => new RawCoordinates(x.Points)).ToList();
-
-        //GameLogic.SubmitCoordinates(lines, (int)_backgroundRenderer.bounds.size.x, (int)_backgroundRenderer.bounds.size.y);
+        _onSubmitHandler.OnSubmit(_lineSegments, (int)_backgroundRenderer.bounds.size.x, (int)_backgroundRenderer.bounds.size.y);
     }    
 
     public void ShowDrawingVisual()
@@ -110,7 +114,7 @@ public class DrawingSurfaceBehaviour : MonoBehaviour
         return mappedVector;
     }
 
-    private void Reset()
+    public void Reset()
     {
         foreach (var lineSegment in _lineSegments)
         {

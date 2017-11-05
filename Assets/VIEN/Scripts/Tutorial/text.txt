@@ -7,3 +7,5 @@ Now hold your right hand up and make a pinch gesture with your thumb and forefin
 3.
 If you are done drawing, make the pinch gesture with the left hand and I will recognize your picture.
 
+4.
+Well Done! You are ready to start.

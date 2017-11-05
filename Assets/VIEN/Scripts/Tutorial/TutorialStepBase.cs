@@ -6,7 +6,7 @@ public abstract class TutorialStepBase : MonoBehaviour
     public AudioClip Voice;
     public string Text;
     public GameObject VoiceHud;
-    private AudioSource _audioSource;
+    protected AudioSource _audioSource;
 
     public abstract bool HasFinished { get; }
 

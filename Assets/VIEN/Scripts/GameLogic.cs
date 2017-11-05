@@ -4,8 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 public class GameLogic : MonoBehaviour {
-	public GameObject DrawingHud;
-	public GameObject DrawingSurface;
+	public GameObject IngameLogic;
     public GameObject drawables;
 	public GameObject Tutorial;
     private Draw_Objects Draw_Objects;
@@ -24,6 +23,7 @@ public class GameLogic : MonoBehaviour {
 	public void OnTutorialFinished()
 	{
 		Tutorial.SetActive(false);
+		IngameLogic.SetActive(true);
 	}
 
     public void SubmitCoordinates(List<RawCoordinates> coordinates, int width, int height)

@@ -5,12 +5,14 @@ using UnityEngine;
 public class TutorialBehavior : MonoBehaviour
 {
 	public GameObject GameLogic;
+	public DrawingSurfaceBehaviour DrawingSurfaceBehaviour;
     public TutorialStepBase[] TutorialSteps;
 
     private int _currentStep = 0;
 
     void OnEnable() {
 		TutorialSteps[_currentStep].enabled = true;
+		DrawingSurfaceBehaviour.SetOnSubmitHandler(new EmptyOnSubmit());
     }
 
     // Update is called once per frame
