@@ -113,7 +113,6 @@ class make_req
 		]
 	}]
 }";
-Debug.Log(json);
             streamWriter.Write(json);
             streamWriter.Flush();
             streamWriter.Close();

@@ -11,7 +11,7 @@ public class RawCoordinates
         foreach(var coordinate in coordinates)
         {
             X.Add(coordinate.x);
-            Y.Add(coordinate.y);
+            Y.Add(-coordinate.y);
         }
 
         /*
