@@ -4,10 +4,10 @@ using UnityEngine;
 public class DrawingStates
 {
     private DrawingStateEnum _currentState;
-    private readonly GesturesLogic _gesturesLogic;
+    private readonly DrawingSurfaceBehaviour _gesturesLogic;
     private bool _oneTimeActionExecuted;
 
-    public DrawingStates(GesturesLogic gesturesLogic)
+    public DrawingStates(DrawingSurfaceBehaviour gesturesLogic)
     {
         _currentState = DrawingStateEnum.Disabled;
         _gesturesLogic = gesturesLogic;
@@ -94,7 +94,7 @@ public class DrawingStates
                 _gesturesLogic.AddCurrentInputPointToLine(localVector);
                 break;
             case (DrawingStateEnum.Submit):
-                ExecuteOneTimeAction(() => _gesturesLogic.Submit());
+                ExecuteOneTimeAction(() => _gesturesLogic.OnDrawingFinished());
                 break;
             default:
                 throw new Exception("out of range" + _currentState);

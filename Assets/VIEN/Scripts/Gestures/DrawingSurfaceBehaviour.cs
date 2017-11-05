@@ -6,9 +6,8 @@ using Leap.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GesturesLogic : MonoBehaviour
+public class DrawingSurfaceBehaviour : MonoBehaviour
 {
-    public GameLogic GameLogic;
     public GameObject DrawingBackground;
     public RawImage VisualRepresentation;
     public Material LineMaterial;
@@ -75,12 +74,12 @@ public class GesturesLogic : MonoBehaviour
         DrawingSurface.SetActive(false);
     }
     
-    public void Submit()
+    public void OnDrawingFinished()
     {
         var lines = _lineSegments.Where(x=> !x.IsEmpty).Select(x => new RawCoordinates(x.Points)).ToList();
 
-        GameLogic.SubmitCoordinates(lines, (int)_backgroundRenderer.bounds.size.x, (int)_backgroundRenderer.bounds.size.y);
-    }
+        //GameLogic.SubmitCoordinates(lines, (int)_backgroundRenderer.bounds.size.x, (int)_backgroundRenderer.bounds.size.y);
+    }    
 
     public void ShowDrawingVisual()
     {
