@@ -12,7 +12,7 @@ public class GameLogic : MonoBehaviour {
     public void Start()
     {
         Draw_Objects = drawables.GetComponent<Draw_Objects>();
-		OnStartTutorial();
+		OnTutorialFinished();
     }
 
 	public void OnStartTutorial()
