@@ -11,15 +11,11 @@ public class GesturesLogic : MonoBehaviour
     public GameLogic GameLogic;
     public GameObject DrawingBackground;
     public RawImage VisualRepresentation;
-    public MouseInput MouseInputModeGameObject;
-    public GestureInput GestureInputModeGameObject;
     public Material LineMaterial;
+    public InputBehaviour InputBehaviour;
 
-    private IInput _currentInput;
     private DrawingStates _states;
     private RectTransform _visualRepresentationRectTransform;
-    private IInput _mouseInput;
-    private IInput _gestureInput;
     private Renderer _backgroundRenderer;
     private float _screenScaleFactorWidth;
     private float _screenScaleFactorHeight;
@@ -32,30 +28,21 @@ public class GesturesLogic : MonoBehaviour
     {
         _lineSegments = new List<LineSegment>();
         _visualRepresentationRectTransform = VisualRepresentation.GetComponent<RectTransform>();
-        _mouseInput = MouseInputModeGameObject.GetComponent<IInput>();
-        _gestureInput = GestureInputModeGameObject.GetComponent<IInput>();
         _backgroundRenderer = DrawingBackground.GetComponent<Renderer>();
-
-        _currentInput = _gestureInput;
 
         _states = new DrawingStates(this);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown("i"))
-            SwitchInput();
-
-        _currentInput.UpdateInput();
-
-        _states.UpdateState(_currentInput);
+        _states.UpdateState(InputBehaviour.CurrentInput);
 
         _states.DoAction();
     }
 
     public Vector3 GetLocalPoint()
     {
-        Vector3 positionScreen = _currentInput.GetScreenCoordinate();
+        Vector3 positionScreen = InputBehaviour.GetScreenCoordinate();
         var positionLocal = MapScreenToLocal(positionScreen);
         return positionLocal;
     }
@@ -108,18 +95,6 @@ public class GesturesLogic : MonoBehaviour
     {
         _currentLineSegment = new LineSegment(DrawingBackground.transform.parent, LineMaterial);
         _lineSegments.Add(_currentLineSegment);
-    }
-
-    private void SwitchInput()
-    {
-        _currentInput.Dispose();
-
-        if (_currentInput == _mouseInput)
-            _currentInput = _gestureInput;
-        else
-            _currentInput = _mouseInput;
-
-        _currentInput.StartInput();
     }
 
     private Vector3 MapScreenToLocal(Vector3 positionScreen)

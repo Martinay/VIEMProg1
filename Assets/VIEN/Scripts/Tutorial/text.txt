@@ -1,0 +1,9 @@
+1.
+I will show you now how to navigate through this game. Hold your left hand up and extend all fingers to enable the drawing surface.
+
+2.
+Now hold your right hand up and make a pinch gesture with your thumb and forefinger. You can draw now with this gesture.
+
+3.
+If you are done drawing, make the pinch gesture with the left hand and I will recognize your picture.
+
