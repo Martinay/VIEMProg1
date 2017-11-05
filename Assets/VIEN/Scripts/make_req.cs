@@ -133,16 +133,18 @@ class make_req
             foreach (GameObject s in drawables)
             {
                 var tmpDrawable = s.GetComponent<DrawableBehavior>();
-                index = resp.IndexOf(tmpDrawable.SearchTag);
+				foreach (string tag in tmpDrawable.SearchTag){
+	                index = resp.IndexOf(tag);
 
-                //if element found, add it
-                if (index == -1)
-                    continue;
-                if (index > currentBest)
-                    continue;
+	                //if element found, add it
+	                if (index == -1)
+	                    continue;
+	                if (index > currentBest)
+	                    continue;
 
-                currentBest = index;
-                currentBestDrawable = tmpDrawable;
+	                currentBest = index;
+	                currentBestDrawable = tmpDrawable;
+				}
             }
             
             if(currentBestDrawable != null)
