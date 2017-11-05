@@ -130,16 +130,16 @@ public class LightBehavior : MonoBehaviour {
 
 	void StartState () {
 		time += Time.deltaTime;
-		if(time >= 3.0f && innerState == 0) {
+		if(time >= 0.5f /*3.0f*/ && innerState == 0) {
 			SetGroupActive (new int[] { 0 }, true);
 			gameObject.SendMessage ("PlayLightsOn");
 			innerState++;
 		}
-		else if (time >= 12.0f && innerState == 1) {
-			gameObject.SendMessage ("PlayIntroduction");
+		else if (time >= 0.7f /*12.0f*/ && innerState == 1) {
+			//gameObject.SendMessage ("PlayIntroduction");
 			innerState++;
 		}
-		else if (time >= 65.0f && innerState == 2) {
+		else if (time >= 1.0f /*65.0f*/ && innerState == 2) {
 			SetGroupActive (new int[] { 1, 2 }, true);
 			gameObject.SendMessage ("PlayLightsOn");
 			innerState++;
