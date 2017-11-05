@@ -86,17 +86,9 @@ public class GesturesLogic : MonoBehaviour
 
     public void Submit()
     {
-        var points = _lineSegments.SelectMany(m => m.Points).Reverse();
-        var x = new List<float>();
-        var y = new List<float>();
+        var lines = _lineSegments.Where(x=> !x.IsEmpty).Select(x => new RawCoordinates(x.Points)).ToList();
 
-        foreach (var point in points)
-        {
-            x.Add(point.x);
-            y.Add(point.y);
-        }
-
-        GameLogic.SubmitCoordinates(new RawCoordinates(x.ToArray(), y.ToArray(), (int)_backgroundRenderer.bounds.size.x, (int)_backgroundRenderer.bounds.size.y));
+        GameLogic.SubmitCoordinates(lines, (int)_backgroundRenderer.bounds.size.x, (int)_backgroundRenderer.bounds.size.y);
     }
 
     public void ShowDrawingVisual()

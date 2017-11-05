@@ -26,10 +26,9 @@ public class GameLogic : MonoBehaviour {
         Draw_Objects = drawables.GetComponent<Draw_Objects>();
     }
 
-    public void SubmitCoordinates(RawCoordinates coordinates)
-	{
-        
-        make_req req = new make_req(coordinates, Draw_Objects.getDrawableObjects());
+    public void SubmitCoordinates(List<RawCoordinates> coordinates, int width, int height)
+	{        
+        make_req req = new make_req(coordinates, width, height, Draw_Objects.getDrawableObjects());
         req.Req();
 	}
 }

@@ -9,21 +9,18 @@ using UnityEngine;
 
 class make_req
 {
-
-    int[] _x;
-    int[] _y;
+    List<RawCoordinates> coordinates;
     int width;
     int height;
     GameObject[] drawables;
 
     private string _response;
 
-    public make_req(RawCoordinates coordinates, GameObject[] a)
+    public make_req(List<RawCoordinates> coordinates, int width, int height, GameObject[] a)
     {
-        _x = coordinates.X;
-        _y = coordinates.Y;
-        width = coordinates.Width;
-        height = coordinates.Height;
+        this.coordinates = coordinates;
+        this.width = width;
+        this.height = height;
         drawables = a;
     }
 
@@ -78,10 +75,11 @@ class make_req
 			""height"":"; json += height;
             json += @"
         },
-		""ink"": [
-
-            [[";
-            foreach (float x in _x)
+		""ink"": [";
+        foreach(var line in coordinates)
+        {
+            json +="[[";
+            foreach (float x in line.X)
             {
                 json += x;
                 json += ",";
@@ -89,7 +87,7 @@ class make_req
             json = json.Remove(json.LastIndexOf(","), 1);
             json += "],[";
 
-            foreach (float y in _y)
+            foreach (float y in line.Y)
             {
                 json += y;
                 json += ",";
@@ -97,9 +95,9 @@ class make_req
             json = json.Remove(json.LastIndexOf(","), 1);
             json += "],[";
 
-            foreach (float y in _y)
+            int i = 0;
+            foreach (float y in line.Y)
             {
-                int i = 0;
                 json += i;
                 json += ",";
                 i++;
@@ -109,11 +107,13 @@ class make_req
 
             json += @"
  
-			]
+			],";}
+            json = json.Remove(json.LastIndexOf(","), 1);
+            json +=@"
 		]
 	}]
 }";
-
+Debug.Log(json);
             streamWriter.Write(json);
             streamWriter.Flush();
             streamWriter.Close();
@@ -133,21 +133,22 @@ class make_req
             foreach (GameObject s in drawables)
             {
                 var tmpDrawable = s.GetComponent<DrawableBehavior>();
-				foreach (string tag in tmpDrawable.SearchTag){
-	                index = resp.IndexOf(tag);
+                foreach (string tag in tmpDrawable.SearchTag)
+                {
+                    index = resp.IndexOf(tag);
 
-	                //if element found, add it
-	                if (index == -1)
-	                    continue;
-	                if (index > currentBest)
-	                    continue;
+                    //if element found, add it
+                    if (index == -1)
+                        continue;
+                    if (index > currentBest)
+                        continue;
 
-	                currentBest = index;
-	                currentBestDrawable = tmpDrawable;
-				}
+                    currentBest = index;
+                    currentBestDrawable = tmpDrawable;
+                }
             }
-            
-            if(currentBestDrawable != null)
+
+            if (currentBestDrawable != null)
             {
                 Debug.Log(currentBestDrawable.SearchTag + " found");
                 currentBestDrawable.SendMessage("Teleport");
