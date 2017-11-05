@@ -13,6 +13,9 @@ public class GesturesLogic : MonoBehaviour
     public RawImage VisualRepresentation;
     public Material LineMaterial;
     public InputBehaviour InputBehaviour;
+    
+    public GameObject DrawingHud;
+    public GameObject DrawingSurface;
 
     private DrawingStates _states;
     private RectTransform _visualRepresentationRectTransform;
@@ -68,9 +71,10 @@ public class GesturesLogic : MonoBehaviour
 
     public void HideDrawingVisual()
     {
-        GameLogic.ExitDrawMode();
+        DrawingHud.SetActive(false);
+        DrawingSurface.SetActive(false);
     }
-
+    
     public void Submit()
     {
         var lines = _lineSegments.Where(x=> !x.IsEmpty).Select(x => new RawCoordinates(x.Points)).ToList();
@@ -81,7 +85,9 @@ public class GesturesLogic : MonoBehaviour
     public void ShowDrawingVisual()
     {
         Reset();
-        GameLogic.EnterDrawMode();
+
+        DrawingHud.SetActive(true);
+        DrawingSurface.SetActive(true);
 
         var visualRepresentationWidth = Math.Abs(_visualRepresentationRectTransform.rect.width);
         var visualRepresentationHeight = Math.Abs(_visualRepresentationRectTransform.rect.height);

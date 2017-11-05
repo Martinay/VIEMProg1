@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class TutorialBehavior : MonoBehaviour
 {
+	public GameObject GameLogic;
     public TutorialStepBase[] TutorialSteps;
 
     private int _currentStep = 0;
-
-	void OnStart()
-	{
-		OnEnable();
-	}
 
     void OnEnable() {
 		TutorialSteps[_currentStep].enabled = true;
@@ -25,7 +21,8 @@ public class TutorialBehavior : MonoBehaviour
 
 		TutorialSteps[_currentStep].enabled = false;
 		_currentStep ++;
-		
+		print(_currentStep);
+		print(TutorialSteps.Length);
 		if (_currentStep >= TutorialSteps.Length)
 		{
 			StartGame();
@@ -37,6 +34,6 @@ public class TutorialBehavior : MonoBehaviour
 
 	void StartGame()
 	{
-        gameObject.SetActive(false);
+		GameLogic.SendMessage("OnTutorialFinished");
 	}
 }
