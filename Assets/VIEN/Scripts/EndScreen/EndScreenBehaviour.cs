@@ -17,7 +17,7 @@ public class EndScreenBehaviour : MonoBehaviour
         FpsController.SetActive(false);
         Camera.enabled = true;
         _hudIsActive = false;
-        
+                
         _audioSource = gameObject.AddComponent<AudioSource>();
         _audioSource.clip = Voice;
         _audioSource.loop = false;

@@ -12,6 +12,7 @@ public class TutorialBehavior : MonoBehaviour
 
     void OnEnable() {
 		TutorialSteps[_currentStep].enabled = true;
+        DrawingSurfaceBehaviour.gameObject.SetActive(true);
 		DrawingSurfaceBehaviour.SetOnSubmitHandler(new EmptyOnSubmit());
     }
 

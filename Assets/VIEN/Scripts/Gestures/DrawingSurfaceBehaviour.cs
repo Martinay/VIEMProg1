@@ -27,7 +27,7 @@ public class DrawingSurfaceBehaviour : MonoBehaviour
 
     public bool IsCurrentLineSegmentEmpty { get { return _currentLineSegment.Points.Count() == 0; } }
 
-    void Start()
+    void OnEnable()
     {
         _lineSegments = new List<LineSegment>();
         _visualRepresentationRectTransform = VisualRepresentation.GetComponent<RectTransform>();

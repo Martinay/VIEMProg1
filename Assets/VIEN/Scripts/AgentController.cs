@@ -11,8 +11,7 @@ public class AgentController : MonoBehaviour {
     Vector3 startstate;
     public GameObject StartPosition;
     bool newround;
-
-
+    private float volume;
 
     void Start()
     {
@@ -33,6 +32,7 @@ public class AgentController : MonoBehaviour {
             audioSource.loop = true;
             StartPosition.SendMessage("newPosition");
             newround = false;
+            audioSource.volume = volume;
             audioSource.Play();
         }
     }
@@ -42,7 +42,9 @@ public class AgentController : MonoBehaviour {
         if (collision.gameObject.tag == "Player")
         {
             audioSource.loop = false;
-            audioSource.PlayOneShot(Dead_sound, 0.7F);
+            volume = audioSource.volume;
+            audioSource.volume = 1.0f;
+            audioSource.PlayOneShot(Dead_sound, 1.0f);
             newround = true;
         }
     }
