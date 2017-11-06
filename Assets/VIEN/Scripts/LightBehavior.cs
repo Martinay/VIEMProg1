@@ -124,6 +124,9 @@ public class LightBehavior : MonoBehaviour {
 				new int[] { 10 }
 			);
 			break;
+		case 14:
+			_gamelogic.SendMessage("OnShowEndscreen");
+			break;
 		default:
 			break;
 		}
