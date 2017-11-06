@@ -19,7 +19,10 @@ public class AgentController : MonoBehaviour {
         agent.destination = goal.position;
     }
 
-
+    void OnDisable()
+    {
+        agent.isStopped = true;
+    }
 
 
     void OnTriggerEnter(Collider collision)

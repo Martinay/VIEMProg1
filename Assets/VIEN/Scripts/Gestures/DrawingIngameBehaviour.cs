@@ -16,6 +16,11 @@ public class DrawingIngameBehaviour : MonoBehaviour, IOnSubmit
         DrawingSurfaceBehaviour.SetOnSubmitHandler(this);
     }
 
+    void OnDisable()
+    {
+        DrawingSurfaceBehaviour.gameObject.SetActive(false);
+    }
+
     public void OnSubmit(IEnumerable<LineSegment> lines, int width, int height)
     {
         var rawCoordinates = lines.Where(x => !x.IsEmpty).Select(x => new RawCoordinates(x.Points)).ToList();

@@ -8,12 +8,20 @@ public class GameLogic : MonoBehaviour {
     public GameObject drawables;
 	public GameObject Tutorial;
     public GameObject Agent;
+    public GameObject EndScreen;
     private Draw_Objects Draw_Objects;
 
     public void Start()
     {
         Draw_Objects = drawables.GetComponent<Draw_Objects>();
     }
+
+	public void OnShowEndscreen()
+	{
+		IngameLogic.SetActive(false);
+		EndScreen.SetActive(true);
+		Agent.SetActive(false);
+	}
 
 	public void OnStartTutorial()
 	{
