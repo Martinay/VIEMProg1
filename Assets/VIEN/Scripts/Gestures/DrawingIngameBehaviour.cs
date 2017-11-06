@@ -3,22 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DrawingIngameBehaviour : MonoBehaviour, IOnSubmit {
+public class DrawingIngameBehaviour : MonoBehaviour, IOnSubmit
+{
 
     public GameLogic GameLogic;
-	public DrawingSurfaceBehaviour DrawingSurfaceBehaviour; 
+    public DrawingSurfaceBehaviour DrawingSurfaceBehaviour;
 
-	void OnEnable()
-	{
+    void OnEnable()
+    {
         DrawingSurfaceBehaviour.gameObject.SetActive(true);
         DrawingSurfaceBehaviour.Reset();
-		DrawingSurfaceBehaviour.SetOnSubmitHandler(this);
-	}
+        DrawingSurfaceBehaviour.SetOnSubmitHandler(this);
+    }
 
     public void OnSubmit(IEnumerable<LineSegment> lines, int width, int height)
     {
-        var rawCoordinates = lines.Where(x=> !x.IsEmpty).Select(x => new RawCoordinates(x.Points)).ToList();
+        var rawCoordinates = lines.Where(x => !x.IsEmpty).Select(x => new RawCoordinates(x.Points)).ToList();
 
-        GameLogic.SubmitCoordinates(rawCoordinates, width, height);
+        if (rawCoordinates.Count == 0)
+        {
+            print("nothing drawn");
+            return;
+        }
+
+        GameLogic.SendMessage("SubmitCoordinates", new SubmitCoordinates(rawCoordinates, width, height));
     }
 }

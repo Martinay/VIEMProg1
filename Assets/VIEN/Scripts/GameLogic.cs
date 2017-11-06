@@ -12,7 +12,6 @@ public class GameLogic : MonoBehaviour {
     public void Start()
     {
         Draw_Objects = drawables.GetComponent<Draw_Objects>();
-		OnTutorialFinished();
     }
 
 	public void OnStartTutorial()
@@ -26,9 +25,10 @@ public class GameLogic : MonoBehaviour {
 		IngameLogic.SetActive(true);
 	}
 
-    public void SubmitCoordinates(List<RawCoordinates> coordinates, int width, int height)
+    public void SubmitCoordinates(SubmitCoordinates coordinates)
 	{        
-        make_req req = new make_req(coordinates, width, height, Draw_Objects.getDrawableObjects());
+		print("SubmitStart");
+        make_req req = new make_req(coordinates.Coordinates, coordinates.Width, coordinates.Height, Draw_Objects.getDrawableObjects());
         req.Req();
 	}
 }
