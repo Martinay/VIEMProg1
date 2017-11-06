@@ -6,7 +6,7 @@ public class AgentController : MonoBehaviour {
 
     public Transform goal;
     private UnityEngine.AI.NavMeshAgent agent;
-    public AudioClip dead;
+    public AudioClip Dead_sound;
     AudioSource audioSource;
     void Start()
     {
@@ -30,7 +30,7 @@ public class AgentController : MonoBehaviour {
         if (collision.gameObject.tag == "Player")
         {
             audioSource.loop = false;
-            audioSource.PlayOneShot(dead, 0.7F);
+            audioSource.PlayOneShot(Dead_sound, 0.7F);
             
         }
     }

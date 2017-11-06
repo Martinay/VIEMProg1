@@ -13,7 +13,6 @@ class make_req
     int width;
     int height;
     GameObject[] drawables;
-
     private string _response;
 
     public make_req(List<RawCoordinates> coordinates, int width, int height, GameObject[] a)
@@ -154,8 +153,8 @@ class make_req
             }
             else
             {
-                //If no element was found
-                Debug.LogWarning("Nothing Found");
+                SoundBehavior s = new SoundBehavior();
+                s.PlayWrong();
             }
             Debug.Log(resp);
             /*
