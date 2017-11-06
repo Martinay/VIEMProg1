@@ -8,15 +8,33 @@ public class AgentController : MonoBehaviour {
     private UnityEngine.AI.NavMeshAgent agent;
     public AudioClip Dead_sound;
     AudioSource audioSource;
+    Vector3 startstate;
+    public GameObject StartPosition;
+    bool newround;
+
+
+
     void Start()
     {
+        startstate = gameObject.transform.position;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
+        audioSource.loop = true;
+        newround = false;
     }
 
     private void Update()
     {
+
         agent.destination = goal.position;
+        if (audioSource.isPlaying == false && newround == true)
+        {   
+            transform.position = startstate;
+            audioSource.loop = true;
+            StartPosition.SendMessage("newPosition");
+            newround = false;
+            audioSource.Play();
+        }
     }
 
     void OnTriggerEnter(Collider collision)
@@ -25,7 +43,7 @@ public class AgentController : MonoBehaviour {
         {
             audioSource.loop = false;
             audioSource.PlayOneShot(Dead_sound, 0.7F);
-            
+            newround = true;
         }
     }
 }

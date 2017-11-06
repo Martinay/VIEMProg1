@@ -20,7 +20,7 @@ public class DrawableBehavior : MonoBehaviour {
 		WorldInteraction.SendMessage ("Play"+SearchTag[0], gameObject);
 	}
 
-	private void newPosition() {
+	public void newPosition() {
 		player.transform.position = this.transform.position;
 		player.transform.rotation = this.transform.rotation;
 		WorldInteraction.SendMessage ("SetState",State);
