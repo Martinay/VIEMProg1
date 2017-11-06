@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LightBehavior : MonoBehaviour {
+	public GameObject _gamelogic;
 	public GameObject Light0_0, Light0_1, Light1, Light2, Light3, Light4, Light5, Light6_0, Light6_1, Light7, Light8_0,
 	Light8_1, Light9_0, Light9_1, Light9_2, Light10, Light11, Light12, Light13, Light14;
 	public int State; 
@@ -142,6 +143,10 @@ public class LightBehavior : MonoBehaviour {
 		else if (time >= 1.0f /*65.0f*/ && innerState == 2) {
 			SetGroupActive (new int[] { 1, 2 }, true);
 			gameObject.SendMessage ("PlayLightsOn");
+			innerState++;
+		}
+		else if (time >= 2.0f /*67.0f*/ && innerState == 3) {
+			_gamelogic.SendMessage ("OnStartTutorial");
 			innerState++;
 			Reset ();
 		}

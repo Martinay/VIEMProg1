@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.05
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08734072, g: 0.101324044, b: 0.12431402, a: 0.05}
+  m_IndirectSpecularColor: {r: 0.08734069, g: 0.101323955, b: 0.12431399, a: 0.05}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3122,7 +3122,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 368873421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 296.5, y: 171, z: 0}
+  m_LocalPosition: {x: 341.5, y: 208, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4330,6 +4330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0cae000c3432f941a2159643f6aad63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gamelogic: {fileID: 574147090}
   Light0_0: {fileID: 1659232345}
   Light0_1: {fileID: 1897956142}
   Light1: {fileID: 310704263}
@@ -4369,6 +4370,7 @@ MonoBehaviour:
   Wrong3: {fileID: 8300000, guid: b1ea66c09b2dc09478f9ead162d61b2e, type: 3}
   Wrong4: {fileID: 8300000, guid: dced38f19046da94cb269b389aed0726, type: 3}
   Heart: {fileID: 8300000, guid: 3d912772899321f42bfe9dcc207c9920, type: 3}
+  Banana: {fileID: 8300000, guid: 77a3437220c5b494287f4ab90a68bff4, type: 3}
 --- !u!1 &473128557
 GameObject:
   m_ObjectHideFlags: 0

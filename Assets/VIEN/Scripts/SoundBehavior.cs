@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundBehavior : MonoBehaviour {
-	public AudioClip LightsOn, Introduction, Wrong1, Wrong2, Wrong3, Wrong4, Heart;
+	public AudioClip LightsOn, Introduction, Wrong1, Wrong2, Wrong3, Wrong4, Heart, Banana;
 
 	// Use this for initialization
 	void Start () {
@@ -39,6 +39,10 @@ public class SoundBehavior : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(Wrong4, Camera.main.transform.position);
 			break;
 		}
+	}
+
+	public void PlayBanana () {
+		AudioSource.PlayClipAtPoint(Banana, Camera.main.transform.position);
 	}
 
 	public void PlayHeart () {

@@ -18,6 +18,8 @@ public class DrawableBehavior : MonoBehaviour {
 	}
 
 	public void Teleport() {
+		WorldInteraction.SendMessage ("PlayBanana");
+		System.Threading.Thread.Sleep (3000);
 		player.transform.position = this.transform.position;
 		player.transform.rotation = this.transform.rotation;
 		WorldInteraction.SendMessage ("SetState",State);
