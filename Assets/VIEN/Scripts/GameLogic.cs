@@ -7,6 +7,7 @@ public class GameLogic : MonoBehaviour {
 	public GameObject IngameLogic;
     public GameObject drawables;
 	public GameObject Tutorial;
+    public GameObject Agent;
     private Draw_Objects Draw_Objects;
 
     public void Start()
@@ -23,6 +24,7 @@ public class GameLogic : MonoBehaviour {
 	{
 		Tutorial.SetActive(false);
 		IngameLogic.SetActive(true);
+        Agent.SetActive(true);
 	}
 
     public void SubmitCoordinates(SubmitCoordinates coordinates)

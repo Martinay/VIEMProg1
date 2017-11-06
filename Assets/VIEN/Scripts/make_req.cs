@@ -152,6 +152,11 @@ class make_req
                 Debug.Log(currentBestDrawable.SearchTag + " found");
                 currentBestDrawable.SendMessage("Teleport");
             }
+            else
+            {
+                //If no element was found
+                Debug.LogWarning("Nothing Found");
+            }
             Debug.Log(resp);
             /*
             if (dict.Count > 0)
