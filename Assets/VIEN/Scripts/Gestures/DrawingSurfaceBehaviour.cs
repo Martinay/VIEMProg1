@@ -43,6 +43,11 @@ public class DrawingSurfaceBehaviour : MonoBehaviour
         _states.DoAction();
     }
 
+    void OnDisable()
+    {
+        DrawingHud.SetActive(false);
+    }
+
     public void SetOnSubmitHandler(IOnSubmit onSubmit)
     {
         _onSubmitHandler = onSubmit;

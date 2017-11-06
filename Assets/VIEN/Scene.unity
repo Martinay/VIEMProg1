@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.05
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08734069, g: 0.101323955, b: 0.12431399, a: 0.05}
+  m_IndirectSpecularColor: {r: 0.08734072, g: 0.101324044, b: 0.12431402, a: 0.05}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -304,6 +304,22 @@ Prefab:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: f1c73dbf7dd80f841910d6a954a49be1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ef3b0f771e704544987dcc852d7b68e1, type: 2}
+    - target: {fileID: 400144, guid: f1c73dbf7dd80f841910d6a954a49be1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400144, guid: f1c73dbf7dd80f841910d6a954a49be1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400144, guid: f1c73dbf7dd80f841910d6a954a49be1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1c73dbf7dd80f841910d6a954a49be1, type: 3}
   m_IsPrefabParent: 0
@@ -324,8 +340,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 2.5
+  m_Acceleration: 3
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -3298,7 +3314,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 368873421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 338, y: 203, z: 0}
+  m_LocalPosition: {x: 307.5, y: 171, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
