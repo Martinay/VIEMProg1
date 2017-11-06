@@ -24,7 +24,8 @@ public class SoundBehavior : MonoBehaviour {
 	}
 
 	public void PlayWrong () {
-		int src = 0;
+		System.Random rand = new System.Random ();
+		int src = rand.Next(0,4);
 		switch(src){
 		case 0:
 			AudioSource.PlayClipAtPoint(Wrong1, Camera.main.transform.position);
