@@ -134,21 +134,21 @@ public class LightBehavior : MonoBehaviour {
 
 	void StartState () {
 		time += Time.deltaTime;
-		if(time >= 0.5f /*3.0f*/ && innerState == 0) {
+		if(time >= 2.0f && innerState == 0) {
 			SetGroupActive (new int[] { 0 }, true);
 			gameObject.SendMessage ("PlayLightsOn");
 			innerState++;
 		}
-		else if (time >= 0.7f /*12.0f*/ && innerState == 1) {
-			//gameObject.SendMessage ("PlayIntroduction");
+		else if (time >= 10.0f && innerState == 1) {
+			gameObject.SendMessage ("PlayIntroduction");
 			innerState++;
 		}
-		else if (time >= 1.0f /*65.0f*/ && innerState == 2) {
+		else if (time >= 69.0f && innerState == 2) {
 			SetGroupActive (new int[] { 1, 2 }, true);
 			gameObject.SendMessage ("PlayLightsOn");
 			innerState++;
 		}
-		else if (time >= 2.0f /*67.0f*/ && innerState == 3) {
+		else if (time >= 71.0f && innerState == 3) {
 			_gamelogic.SendMessage ("OnStartTutorial");
 			innerState++;
 			Reset ();
@@ -165,7 +165,7 @@ public class LightBehavior : MonoBehaviour {
 			SetGroupActive (curr, true);
 			innerState++;
 		}
-		if (time >= 3.0f && innerState == 1) {
+		if (time >= 1.5f && innerState == 1) {
 			//activate lights
 			SetGroupActive (activate, true);
 			gameObject.SendMessage ("PlayLightsOn");
