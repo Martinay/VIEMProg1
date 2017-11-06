@@ -1,0 +1,8 @@
+press i to switch the input mode (gesture/keyboard)
+press d in keyboard mode to enable / disable drawing mode
+press s in keyboard mode to submit the drawing
+
+#######  Debug  #######
+press k to skip the intro (attention: press it after the voice has started)
+press o to disable/ enable the enemy
+press p to stop/ start the time in the game
