@@ -10,8 +10,8 @@ public class LightBehavior : MonoBehaviour {
 
 	private float time;
 	private int innerState;
-
-
+	//Debug
+	private float skipTime = 67.0f; 
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +22,11 @@ public class LightBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Timing ();
+	}
+
+	void DebugSkip(){
+		skipTime = time;
+		innerState = 2;
 	}
 
 	public void SetState(int state) {
@@ -143,12 +148,12 @@ public class LightBehavior : MonoBehaviour {
 			gameObject.SendMessage ("PlayIntroduction");
 			innerState++;
 		}
-		else if (time >=69.0f && innerState == 2) {
+		else if (time >= skipTime + 2 && innerState == 2) {
 			SetGroupActive (new int[] { 1, 2 }, true);
 			gameObject.SendMessage ("PlayLightsOn");
 			innerState++;
 		}
-		else if (time >= 71.0f && innerState == 3) {
+		else if (time >= skipTime + 4 && innerState == 3) {
 			_gamelogic.SendMessage ("OnStartTutorial");
 			innerState++;
 			Reset ();

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.05
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08734072, g: 0.101324044, b: 0.12431402, a: 0.05}
+  m_IndirectSpecularColor: {r: 0.08734069, g: 0.101323955, b: 0.12431399, a: 0.05}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3314,7 +3314,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 368873421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 375.5, y: 202, z: 0}
+  m_LocalPosition: {x: 526.5, y: 211, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10602,6 +10602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8106934529d53419a086c98511a056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Worldbehavior: {fileID: 471380949}
   Enemy: {fileID: 541323532}
 --- !u!4 &1043336508
 Transform:

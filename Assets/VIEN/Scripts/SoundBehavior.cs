@@ -28,6 +28,10 @@ public class SoundBehavior : MonoBehaviour {
 		_audioSource.Play();
 	}
 
+	public void StopClip(){
+		_audioSource.Stop ();
+	}
+
 	public void PlayLightsOn () {
 		startClip (LightsOn);
 	}

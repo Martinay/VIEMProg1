@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Presentation : MonoBehaviour {
+	public GameObject Worldbehavior;
 	public GameObject Enemy;
 	private bool pauseGame = false;
 	private bool pauseEnemy = false;
@@ -24,6 +25,11 @@ public class Presentation : MonoBehaviour {
 		if (Input.GetKeyDown ("o")) {
 			Enemy.SetActive(pauseEnemy);
 			pauseEnemy = !pauseEnemy;
+		}
+
+		if (Input.GetKeyDown ("k")) {
+			Worldbehavior.SendMessage ("StopClip");
+			Worldbehavior.SendMessage ("DebugSkip");
 		}
 	}
 }
