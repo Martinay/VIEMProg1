@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class SoundBehavior : MonoBehaviour {
 	public AudioClip LightsOn, Introduction, Wrong1, Wrong2, Wrong3, Wrong4, Heart, Banana;
-
+	private AudioSource _audioSource;
+	private GameObject _gameobject;
+	private bool sendBack;
 	// Use this for initialization
 	void Start () {
-		
+		_audioSource = gameObject.AddComponent<AudioSource>();
+		sendBack = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if ( sendBack && !_audioSource.isPlaying) {
+			sendBack = false;
+			_gameobject.SendMessage("newPosition");
+		}
+	}
+
+	public void startClip(AudioClip clip){
+		_audioSource.clip = clip;
+		_audioSource.loop = false;
+		_audioSource.Play();
 	}
 
 	public void PlayLightsOn () {
-		AudioSource.PlayClipAtPoint(LightsOn, Camera.main.transform.position);
+		startClip (LightsOn);
 	}
 
 	public void PlayIntroduction () {
-		AudioSource.PlayClipAtPoint(Introduction, Camera.main.transform.position);
+		startClip (Introduction);
 	}
 
 	public void PlayWrong () {
@@ -28,25 +40,33 @@ public class SoundBehavior : MonoBehaviour {
 		int src = rand.Next(0,4);
 		switch(src){
 		case 0:
-			AudioSource.PlayClipAtPoint(Wrong1, Camera.main.transform.position);
+			startClip (Wrong1);
 			break;
 		case 1:
-			AudioSource.PlayClipAtPoint(Wrong2, Camera.main.transform.position);
+			startClip (Wrong2);
 			break;
 		case 2:
-			AudioSource.PlayClipAtPoint(Wrong3, Camera.main.transform.position);
+			startClip (Wrong3);
 			break;
 		case 3:
-			AudioSource.PlayClipAtPoint(Wrong4, Camera.main.transform.position);
+			startClip (Wrong4);
 			break;
 		}
 	}
 
-	public void PlayBanana () {
-		AudioSource.PlayClipAtPoint(Banana, Camera.main.transform.position);
+	public void PlayBanana (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Banana);
+	}
+
+	public void PlayFish (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Banana);
 	}
 
 	public void PlayHeart () {
-		AudioSource.PlayClipAtPoint(Heart, Camera.main.transform.position);
+		startClip (Heart);
 	}
 }
