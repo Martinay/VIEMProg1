@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundBehavior : MonoBehaviour {
-	public AudioClip LightsOn, Introduction, Wrong1, Wrong2, Wrong3, Wrong4, Heart, Banana;
+	public AudioClip LightsOn, Introduction, Wrong1, Wrong2, Wrong3, Wrong4, Heart, Banana,
+		Mug, Tree, Candle, Butterfly, Book, Baseball, Flower, Wine, Mushroom, Sword, Bow, Chair, Bench, Fish;
 	private AudioSource _audioSource;
 	private GameObject _gameobject;
 	private bool sendBack;
@@ -54,16 +55,94 @@ public class SoundBehavior : MonoBehaviour {
 		}
 	}
 
-	public void PlayBanana (GameObject sender) {
+	public void Playmug (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Mug);
+	}
+
+	public void Playtree (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Tree);
+	}
+
+	public void Playcandle (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Candle);
+	}
+
+	public void Playbutterfly (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Butterfly);
+	}
+
+	public void Playbook (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Book);
+	}
+
+	public void Playbaseball (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Baseball);
+	}
+
+	public void Playflower (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Flower);
+	}
+
+	public void Playwine (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Wine);
+	}
+
+	public void Playmushroom (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Mushroom);
+	}
+
+	public void Playbanana (GameObject sender) {
 		sendBack = true;
 		_gameobject = sender;
 		startClip (Banana);
 	}
 
-	public void PlayFish (GameObject sender) {
+	public void Playsword (GameObject sender) {
 		sendBack = true;
 		_gameobject = sender;
-		startClip (Banana);
+		startClip (Sword);
+	}
+
+	public void Playbow (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Bow);
+	}
+
+	public void Playchair (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Chair);
+	}
+
+	public void Playbench (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Bench);
+	}
+
+	public void Playfish (GameObject sender) {
+		sendBack = true;
+		_gameobject = sender;
+		startClip (Fish);
 	}
 
 	public void PlayHeart () {

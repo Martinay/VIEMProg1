@@ -17,7 +17,7 @@ public class DrawableBehavior : MonoBehaviour {
 	}
 
 	public void Teleport() {
-		WorldInteraction.SendMessage ("PlayBanana", gameObject);
+		WorldInteraction.SendMessage ("Play"+SearchTag[0], gameObject);
 	}
 
 	private void newPosition() {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.05
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08734072, g: 0.101324044, b: 0.12431402, a: 0.05}
+  m_IndirectSpecularColor: {r: 0.08734069, g: 0.101323955, b: 0.12431399, a: 0.05}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3174,7 +3174,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 368873421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 307, y: 171, z: 0}
+  m_LocalPosition: {x: 341.5, y: 208, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4423,6 +4423,20 @@ MonoBehaviour:
   Wrong4: {fileID: 8300000, guid: dced38f19046da94cb269b389aed0726, type: 3}
   Heart: {fileID: 8300000, guid: 3d912772899321f42bfe9dcc207c9920, type: 3}
   Banana: {fileID: 8300000, guid: 77a3437220c5b494287f4ab90a68bff4, type: 3}
+  Mug: {fileID: 8300000, guid: 233bfb0fbd8a60b4b843e504706e08b8, type: 3}
+  Tree: {fileID: 8300000, guid: 7d1e11852f94a7a4aa50da62d95e899a, type: 3}
+  Candle: {fileID: 8300000, guid: 3ca3ee17a54381f40b48f7856cbfee05, type: 3}
+  Butterfly: {fileID: 8300000, guid: 639edaaefe15d8b4e83c40be13e94083, type: 3}
+  Book: {fileID: 8300000, guid: 61119a6e82654fb43afac994e7dd2ed2, type: 3}
+  Baseball: {fileID: 8300000, guid: fb14bf43802bb304d82d605b5fa2a850, type: 3}
+  Flower: {fileID: 8300000, guid: 2278b78124b055841aabbcf7ebc89865, type: 3}
+  Wine: {fileID: 8300000, guid: a98c3dd51b043e246a6b80cb44b5afcb, type: 3}
+  Mushroom: {fileID: 8300000, guid: 9cc6fb740e9d9504eb52dcc1b1a2ddf4, type: 3}
+  Sword: {fileID: 8300000, guid: 5639d47af4fb59943bff9002586016a0, type: 3}
+  Bow: {fileID: 8300000, guid: 3bea6227001312349b623ea6e4ab309d, type: 3}
+  Chair: {fileID: 8300000, guid: 1f91736cbced8064bb85dcaee6a9b882, type: 3}
+  Bench: {fileID: 8300000, guid: dd4cf143b8022e94985a463257e08a41, type: 3}
+  Fish: {fileID: 8300000, guid: 25c546f29f526ca43a4344c407b125d4, type: 3}
 --- !u!1 &473128557
 GameObject:
   m_ObjectHideFlags: 0
