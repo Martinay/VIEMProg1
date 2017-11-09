@@ -5,8 +5,10 @@ using UnityEngine;
 public class Presentation : MonoBehaviour {
 	public GameObject Worldbehavior;
 	public GameObject Enemy;
+    public GameObject TestUI;
 	private bool pauseGame = false;
 	private bool pauseEnemy = false;
+    private bool showTestUI = false;
 	// Use this for initialization
 	void Start () {
 		
@@ -31,5 +33,12 @@ public class Presentation : MonoBehaviour {
 			Worldbehavior.SendMessage ("StopClip");
 			Worldbehavior.SendMessage ("DebugSkip");
 		}
-	}
+
+
+        if (Input.GetKeyDown("l"))
+        {
+            showTestUI = !showTestUI;
+            TestUI.SetActive(showTestUI);
+        }
+    }
 }

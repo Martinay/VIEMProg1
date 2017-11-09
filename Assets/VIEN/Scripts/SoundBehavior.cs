@@ -23,7 +23,7 @@ public class SoundBehavior : MonoBehaviour {
 	}
 
 	public void startClip(AudioClip clip){
-		_audioSource.clip = clip;
+        _audioSource.clip = clip;
 		_audioSource.loop = false;
 		_audioSource.Play();
 	}
@@ -43,6 +43,7 @@ public class SoundBehavior : MonoBehaviour {
 	public void PlayWrong () {
 		System.Random rand = new System.Random ();
 		int src = rand.Next(0,4);
+        print(src);
 		switch(src){
 		case 0:
 			startClip (Wrong1);

@@ -153,8 +153,8 @@ class make_req
             }
             else
             {
-                SoundBehavior s = new SoundBehavior();
-                s.PlayWrong();
+                GameObject WorldInteraction = GameObject.Find("WorldInteraction");
+                WorldInteraction.SendMessage("PlayWrong");
             }
             Debug.Log(resp);
             /*
